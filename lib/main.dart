@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           const Spacer(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
               children: [
                 Slider(
