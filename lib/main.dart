@@ -63,6 +63,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  int _actualMs = 500;
+  int _guessMs = 250;
   int _sliderValue = 250;
 
   @override
@@ -100,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     const Spacer(flex: 10),
                     Text(
-                      "NaN",
+                      '${_actualMs}ms',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headline2?.copyWith(
                         color: colorScheme.onPrimary,
@@ -108,7 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const Spacer(),
                     Text(
-                      "You were NaN frames off with your guess of ${_sliderValue}ms!",
+                      "You were "
+                          "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                          " frames off with your guess of ${_guessMs}ms!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: colorScheme.onPrimary,
