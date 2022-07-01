@@ -37,6 +37,8 @@ dependencies:
 
   flutter_font_icons: ^2.2.5
 
+  dynamic_color: ^1.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

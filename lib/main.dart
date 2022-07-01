@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:dynamic_color/dynamic_color.dart';
+
+const defaultColor = Colors.indigo;
 
 void main() {
   runApp(const MyApp());
@@ -8,22 +11,43 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static const title = 'Complete example';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Timing Trainer',
-      theme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.indigo,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        primarySwatch: Colors.indigo,
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.system,
-      home: const MyHomePage(title: "Timing Trainer"),
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        ColorScheme lightColorScheme;
+        ColorScheme darkColorScheme;
+
+        if (lightDynamic != null && darkDynamic != null) {
+          lightColorScheme = lightDynamic.harmonized();
+          darkColorScheme = darkDynamic.harmonized();
+        } else {
+          // Otherwise, use fallback schemes.
+          lightColorScheme = ColorScheme.fromSeed(
+            seedColor: defaultColor,
+          );
+          darkColorScheme = ColorScheme.fromSeed(
+            seedColor: defaultColor,
+            brightness: Brightness.dark,
+          );
+        }
+
+        return MaterialApp(
+          title: 'Timing Trainer',
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightColorScheme,
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkColorScheme,
+          ),
+          themeMode: ThemeMode.system,
+          home: const MyHomePage(title: "Timing Trainer"),
+        );
+      },
     );
   }
 }
