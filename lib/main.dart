@@ -75,9 +75,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Spacer(flex: 10),
-                    Text("NaN", style: Theme.of(context).textTheme.headline2),
+                    Text(
+                      "NaN",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline2?.copyWith(
+                        color: colorScheme.onPrimary,
+                      )
+                    ),
                     const Spacer(),
-                    Text("You were NaN frames off with your guess of ${_sliderValue}ms!"),
+                    Text(
+                      "You were NaN frames off with your guess of ${_sliderValue}ms!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: colorScheme.onPrimary,
+                        fontSize: 16,
+                      )
+                    ),
                     const Spacer(flex: 10),
                   ],
                 ),
