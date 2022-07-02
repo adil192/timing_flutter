@@ -4,6 +4,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'dart:math';
 
 import 'package:timing_flutter/BlinkingSquare.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const defaultColor = Colors.indigo;
 
@@ -75,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
   static const String submit = "Submit";
   static const String reset = "Reset";
 
+  static final Uri githubUri = Uri.parse("https://github.com/adil192/timing_flutter");
+
   @override
   initState() {
     super.initState();
@@ -110,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
             color: colorScheme.onPrimary,
             iconSize: 45,
             onPressed: () {
+              launchUrl(githubUri);
             },
           ),
         ],
