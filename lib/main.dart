@@ -123,8 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
           const Spacer(),
           Center(
             child: SizedBox(
-              width: 400,
-              height: 400,
+              width: 250,
+              height: 250,
               child: BlinkingSquare(
                 isBlinking: !isSubmitted,
                 blinkOnDuration: Duration(milliseconds: _actualMs),
