@@ -154,6 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     max: 500,
                     divisions: 29,
                     onChanged: (double value) {
+                      if (isSubmitted) return;
                       setState(() {
                         _sliderValue = value.round();
                       });
