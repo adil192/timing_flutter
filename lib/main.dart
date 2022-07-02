@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _chooseMs() {
-    _actualMs = Random().nextInt(500);
+    _actualMs = (16 + Random().nextInt(30) * 1000 / 60).ceil();
   }
 
   _onSubmit() {
