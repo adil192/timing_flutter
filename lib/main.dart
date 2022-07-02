@@ -68,6 +68,20 @@ class _MyHomePageState extends State<MyHomePage> {
   int _guessMs = 0;
   int _sliderValue = 250;
 
+  bool isSubmitted = false;
+
+  static const String submit = "Submit";
+  static const String reset = "Reset";
+
+  _onSubmit() {
+    setState(() {
+      isSubmitted = !isSubmitted;
+      if (isSubmitted) {
+        _guessMs = _sliderValue;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -156,8 +170,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         foregroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.onPrimary),
                         textStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
                       ),
-                      child: const Text("Submit"),
-                      onPressed: () {  },
+                      onPressed: _onSubmit,
+                      child: Text(isSubmitted ? reset : submit),
                     )
                   ],
                 ),
