@@ -64,7 +64,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int _actualMs = Random().nextInt(500);
+  int _actualMs = 500;
   int _guessMs = 0;
   int _sliderValue = 250;
 
@@ -73,11 +73,21 @@ class _MyHomePageState extends State<MyHomePage> {
   static const String submit = "Submit";
   static const String reset = "Reset";
 
+  _MyHomePageState() {
+    _chooseMs();
+  }
+
+  _chooseMs() {
+    _actualMs = Random().nextInt(500);
+  }
+
   _onSubmit() {
     setState(() {
       isSubmitted = !isSubmitted;
       if (isSubmitted) {
         _guessMs = _sliderValue;
+      } else { // Reset
+        _chooseMs();
       }
     });
   }
