@@ -3,6 +3,8 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'dart:math';
 
+import 'package:timing_flutter/BlinkingSquare.dart';
+
 const defaultColor = Colors.indigo;
 
 void main() {
@@ -73,7 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
   static const String submit = "Submit";
   static const String reset = "Reset";
 
-  _MyHomePageState() {
+  @override
+  initState() {
+    super.initState();
     _chooseMs();
   }
 
@@ -117,11 +121,9 @@ class _MyHomePageState extends State<MyHomePage> {
             child: SizedBox(
               width: 400,
               height: 400,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  color: colorScheme.primary,
-                ),
+              child: BlinkingSquare(
+                isBlinking: !isSubmitted,
+                blinkOnDuration: Duration(milliseconds: _actualMs),
                 child: Opacity(
                   opacity: isSubmitted ? 1 : 0,
                   child: Column(
