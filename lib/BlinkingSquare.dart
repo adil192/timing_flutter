@@ -55,12 +55,15 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
       blinkOn = true;
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-        color: blinkOn ? colorScheme.primary : Colors.transparent,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: blinkOn ? colorScheme.primary : Colors.transparent,
+        ),
+        child: widget.child,
       ),
-      child: widget.child,
     );
   }
 }

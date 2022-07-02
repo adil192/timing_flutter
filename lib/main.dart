@@ -125,7 +125,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: SizedBox(
               width: 250,
-              height: 250,
               child: BlinkingSquare(
                 isBlinking: !isSubmitted,
                 blinkOnDuration: Duration(milliseconds: _actualMs),
