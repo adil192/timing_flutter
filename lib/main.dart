@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'dart:math';
 
 const defaultColor = Colors.indigo;
 
@@ -63,8 +64,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int _actualMs = 500;
-  int _guessMs = 250;
+  int _actualMs = Random().nextInt(500);
+  int _guessMs = 0;
   int _sliderValue = 250;
 
   @override
@@ -167,4 +168,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }
