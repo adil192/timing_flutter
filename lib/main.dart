@@ -112,30 +112,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   color: colorScheme.primary,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Spacer(flex: 10),
-                    Text(
-                      '${_actualMs}ms',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline2?.copyWith(
-                        color: colorScheme.onPrimary,
-                      )
-                    ),
-                    const Spacer(),
-                    Text(
-                      "You were "
-                          "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
-                          " frames off with your guess of ${_guessMs}ms!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: colorScheme.onPrimary,
-                        fontSize: 16,
-                      )
-                    ),
-                    const Spacer(flex: 10),
-                  ],
+                child: Opacity(
+                  opacity: isSubmitted ? 1 : 0,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(flex: 10),
+                        Text(
+                          '${_actualMs}ms',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline2?.copyWith(
+                            color: colorScheme.onPrimary,
+                          )
+                        ),
+                        const Spacer(),
+                        Text(
+                          "You were "
+                              "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                              " frames off with your guess of ${_guessMs}ms!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: colorScheme.onPrimary,
+                            fontSize: 16,
+                          )
+                        ),
+                        const Spacer(flex: 10),
+                      ],
+                  ),
                 ),
               ),
             ),
