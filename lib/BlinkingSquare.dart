@@ -23,12 +23,15 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
   late CurvedAnimation animation;
   bool blinkOn = true;
 
+  late Duration currentDuration;
+
   @override
   void initState() {
     super.initState();
 
     controller = AnimationController(duration: Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds), vsync: this);
     animation = CurvedAnimation(parent: controller, curve: BlinkCurve(blinkOnDuration: widget.blinkOnDuration));
+    currentDuration = widget.blinkOnDuration;
     animation.addListener(() {
       setState(() {});
     });
@@ -38,6 +41,12 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    if (widget.blinkOnDuration != currentDuration) {
+      currentDuration = widget.blinkOnDuration;
+      controller.duration = Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds);
+      animation.curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration);
+    }
+
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     if (widget.isBlinking) {
