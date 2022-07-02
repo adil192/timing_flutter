@@ -148,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
             child: Column(
               children: [
+                const Text("How long does the box above appear?"),
                 Slider(
                     value: _sliderValue.toDouble(),
                     min: 16,
