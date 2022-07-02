@@ -19,45 +19,44 @@ class BlinkingSquare extends StatefulWidget {
 
 class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProviderStateMixin {
 
-  late AnimationController controller;
-  late CurvedAnimation animation;
+  late AnimationController _controller;
+  late CurvedAnimation _animation;
 
-  late Duration currentDuration;
+  late Duration _currentDuration;
 
-  bool blinkOn = true;
-  double lastAnimationValue = 0;
+  bool _blinkOn = true;
+  double _lastAnimationValue = 0;
 
   @override
   void initState() {
     super.initState();
 
-    controller = AnimationController(duration: Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds), vsync: this);
-    animation = CurvedAnimation(parent: controller, curve: BlinkCurve(blinkOnDuration: widget.blinkOnDuration));
-    currentDuration = widget.blinkOnDuration;
-    animation.addListener(() {
-      if (animation.value == lastAnimationValue) return; // don't setSate if not changed
+    _controller = AnimationController(duration: Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds), vsync: this);
+    _animation = CurvedAnimation(parent: _controller, curve: BlinkCurve(blinkOnDuration: widget.blinkOnDuration));
+    _currentDuration = widget.blinkOnDuration;
+    _animation.addListener(() {
+      if (_animation.value == _lastAnimationValue) return; // don't setSate if not changed
       setState(() {
-        lastAnimationValue = animation.value;
+        _lastAnimationValue = _animation.value;
       });
     });
-    controller.forward();
-    controller.repeat(reverse: false);
+    _controller.repeat(reverse: false);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.blinkOnDuration != currentDuration) {
-      currentDuration = widget.blinkOnDuration;
-      controller.duration = Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds);
-      animation.curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration);
+    if (widget.blinkOnDuration != _currentDuration) {
+      _currentDuration = widget.blinkOnDuration;
+      _controller.duration = Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds);
+      _animation.curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration);
     }
 
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     if (widget.isBlinking) {
-      blinkOn = animation.value == 0;
+      _blinkOn = _animation.value == 0;
     } else {
-      blinkOn = true;
+      _blinkOn = true;
     }
 
     return AspectRatio(
@@ -65,7 +64,7 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
-          color: blinkOn ? colorScheme.primary : Colors.transparent,
+          color: _blinkOn ? colorScheme.primary : Colors.transparent,
         ),
         child: widget.child,
       ),
