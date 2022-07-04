@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Generator for metainfo & .desktop files:
+    https://www.freedesktop.org/software/appstream/metainfocreator/#/
+-->
+<component type="desktop-application">
+    <id>com.adilhanney.timing.timing_flutter</id>
+
+    <name>Timing Trainer</name>
+    <summary>Learn to identify sub-second timing intervals</summary>
+
+    <developer_name>Adil Hanney</developer_name>
+    <url type="homepage">https://github.com/adil192/timing_flutter</url>
+
+    <metadata_license>MIT</metadata_license>
+    <project_license>GPL-3.0-only</project_license>
+
+    <supports>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+        <control>tablet</control>
+    </supports>
+
+    <description>
+        <p>Learn to identify sub-second timing intervals.</p>
+    </description>
+
+    <launchable type="desktop-id">com.adilhanney.timing.timing_flutter.desktop</launchable>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://raw.githubusercontent.com/adil192/timing_flutter/main/assets/screenshots/screenshot_results.png</image>
+        </screenshot>
+    </screenshots>
+
+    <content_rating type="oars-1.1" />
+
+    <releases>
+        <release version="1.0.3" date="2022-07-02">
+            <description>
+                <p>1. Fix square aspect ratio (688729f)</p>
+                <p>2. Reduce how often the screen needs to refresh (61edc8c)</p>
+            </description>
+        </release>
+        <release version="1.0.2" date="2022-07-02">
+            <description>
+                <p>1. Make square smaller</p>
+            </description>
+        </release>
+        <release version="1.0.1" date="2022-07-02">
+            <description>
+                <p>1. Fix blinking interval not updating</p>
+                <p>2. Restrict answers to possible inputs</p>
+            </description>
+        </release>
+        <release version="1.0.0" date="2022-07-02">
+            <description>
+                <p>First release</p>
+            </description>
+        </release>
+    </releases>
+</component>

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=Timing Trainer
+Comment=Learn to identify sub-second timing intervals.
+Categories=Game;LogicGame;
+
+Icon=com.adilhanney.timing.timing_flutter
+Exec=timing_flutter
+Terminal=false
+StartupWMClass=timing_flutter
