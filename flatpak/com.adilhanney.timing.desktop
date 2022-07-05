@@ -6,7 +6,7 @@ Name=Timing Trainer
 Comment=Learn to identify sub-second timing intervals.
 Categories=Game;LogicGame;
 
-Icon=com.adilhanney.timing.timing_flutter
+Icon=com.adilhanney.timing
 Exec=timing_flutter
 Terminal=false
 StartupWMClass=timing_flutter

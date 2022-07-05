@@ -61,7 +61,7 @@ jobs:
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: TimingFlutter.flatpak
-          manifest-path: flatpak/com.adilhanney.timing.timing_flutter.json
+          manifest-path: flatpak/com.adilhanney.timing.json
 
       - name: Upload .flatpak artifact to workflow
         uses: actions/upload-artifact@v2

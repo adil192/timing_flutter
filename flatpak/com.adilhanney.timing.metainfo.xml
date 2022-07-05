@@ -4,7 +4,7 @@
     https://www.freedesktop.org/software/appstream/metainfocreator/#/
 -->
 <component type="desktop-application">
-    <id>com.adilhanney.timing.timing_flutter</id>
+    <id>com.adilhanney.timing</id>
 
     <name>Timing Trainer</name>
     <summary>Learn to identify sub-second timing intervals</summary>
@@ -26,7 +26,7 @@
         <p>Learn to identify sub-second timing intervals.</p>
     </description>
 
-    <launchable type="desktop-id">com.adilhanney.timing.timing_flutter.desktop</launchable>
+    <launchable type="desktop-id">com.adilhanney.timing.desktop</launchable>
     <screenshots>
         <screenshot type="default">
             <image>https://raw.githubusercontent.com/adil192/timing_flutter/main/assets/screenshots/screenshot_results.png</image>
