@@ -20,12 +20,12 @@
         "x86_64"
       ],
       "build-commands": [
-        "mkdir -p FlutterApp",
-        "tar -xf FlutterApp-Linux-Portable.tar.gz -C FlutterApp",
-        "cp -r FlutterApp /app/",
-        "chmod +x /app/FlutterApp/timing_flutter",
+        "mkdir -p TimingFlutter",
+        "tar -xf TimingFlutter-Linux-Portable.tar.gz -C TimingFlutter",
+        "cp -r TimingFlutter /app/",
+        "chmod +x /app/TimingFlutter/timing_flutter",
         "mkdir -p /app/bin",
-        "ln -s /app/FlutterApp/timing_flutter /app/bin/timing_flutter",
+        "ln -s /app/TimingFlutter/timing_flutter /app/bin/timing_flutter",
         "mkdir -p /app/share/metainfo",
         "cp -r com.adilhanney.timing.timing_flutter.metainfo.xml /app/share/metainfo/",
         "mkdir -p /app/share/icons/hicolor/scalable/apps",
@@ -50,7 +50,7 @@
         },
         {
           "type": "file",
-          "path": "../FlutterApp-Linux-Portable.tar.gz"
+          "path": "../TimingFlutter-Linux-Portable.tar.gz"
         }
       ]
     }

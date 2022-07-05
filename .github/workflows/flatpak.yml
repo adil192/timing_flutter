@@ -33,13 +33,13 @@ jobs:
           flutter build linux --release
 
       - name: Compress Flutter build
-        run: tar -C build/linux/x64/release/bundle -cvf FlutterApp-Linux-Portable.tar.gz .
+        run: tar -C build/linux/x64/release/bundle -cvf TimingFlutter-Linux-Portable.tar.gz .
 
       - name: Upload app archive for next steps
         uses: actions/upload-artifact@v2
         with:
-          name: FlutterApp-Archive
-          path: FlutterApp-Linux-Portable.tar.gz
+          name: TimingFlutter-Archive
+          path: TimingFlutter-Linux-Portable.tar.gz
 
   build-flatpak:
     name: Build flatpak
@@ -55,17 +55,17 @@ jobs:
       - name: Download app archive
         uses: actions/download-artifact@v3
         with:
-          name: FlutterApp-Archive
+          name: TimingFlutter-Archive
 
       - name: Build .flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
-          bundle: FlutterApp.flatpak
+          bundle: TimingFlutter.flatpak
           manifest-path: flatpak/com.adilhanney.timing.timing_flutter.json
 
       - name: Upload .flatpak artifact to workflow
         uses: actions/upload-artifact@v2
         with:
           name: Flatpak artifact
-          path: FlutterApp.flatpak
+          path: TimingFlutter.flatpak
 
