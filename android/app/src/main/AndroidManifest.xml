@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.adilhanney.timing.timing_flutter">
+    package="com.adilhanney.timing">
    <application
         android:label="Timing"
         android:name="${applicationName}"

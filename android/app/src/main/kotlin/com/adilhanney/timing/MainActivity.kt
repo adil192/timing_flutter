@@ -1,4 +1,4 @@
-package com.adilhanney.timing.timing_flutter
+package com.adilhanney.timing
 
 import io.flutter.embedding.android.FlutterActivity
 
