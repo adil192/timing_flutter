@@ -114,7 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
             color: colorScheme.onPrimary,
             iconSize: 45,
             onPressed: () {
-              launchUrl(githubUri);
+              launchUrl(
+                githubUri,
+                mode: LaunchMode.externalApplication,
+              );
             },
           ),
         ],
