@@ -36,6 +36,14 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="1.0.8" date="2022-07-10">
+            <description>
+                <p>1. Add padding to text inside blinking square (76d8d83)</p>
+                <p>2. Add Settings dialog (c5e8ac3)</p>
+                <p>3. Add keyboard shortcuts to open Github (Ctrl+G) or Settings (Ctrl+S) (7d45199)</p>
+                <p>4. Add an easy and hard mode (default easy) (42f2f2f)</p>
+            </description>
+        </release>
         <release version="1.0.3" date="2022-07-02">
             <description>
                 <p>1. Fix square aspect ratio (688729f)</p>
