@@ -48,7 +48,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         child: Column(
           children: [
-            Text("Settings", style: Theme.of(context).textTheme.headline3),
+            Text(
+              "Settings",
+              style: Theme.of(context).textTheme.headline3?.copyWith(
+                color: colorScheme.onSurface,
+              ),
+            ),
             const Spacer(),
             SettingsCheckbox(
               label: "Easy mode",
