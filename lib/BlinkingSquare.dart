@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BlinkingSquare extends StatefulWidget {
   const BlinkingSquare({
@@ -18,6 +19,8 @@ class BlinkingSquare extends StatefulWidget {
 }
 
 class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProviderStateMixin {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  SharedPreferences? prefs;
 
   late AnimationController _controller;
   late CurvedAnimation _animation;
@@ -31,9 +34,11 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
   void initState() {
     super.initState();
 
-    _controller = AnimationController(duration: Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds), vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: BlinkCurve(blinkOnDuration: widget.blinkOnDuration));
-    _currentDuration = widget.blinkOnDuration;
+    _awaitPrefs();
+
+    _controller = AnimationController(duration: const Duration(milliseconds: 0), vsync: this);
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+    resetAnimation();
     _animation.addListener(() {
       if (_animation.value == _lastAnimationValue) return; // don't setSate if not changed
       setState(() {
@@ -43,13 +48,24 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
     _controller.repeat(reverse: false);
   }
 
+  _awaitPrefs() async {
+    if (prefs != null) return;
+    prefs = await _prefs;
+    setState(() {
+      _currentDuration = const Duration(milliseconds: 0); // force update
+    });
+  }
+
+  resetAnimation() {
+    _currentDuration = widget.blinkOnDuration;
+    BlinkCurve curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration, easyMode: prefs?.getBool('easyMode') ?? true);
+    _animation.curve = curve;
+    _controller.duration = Duration(milliseconds: curve.durationMs);
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (widget.blinkOnDuration != _currentDuration) {
-      _currentDuration = widget.blinkOnDuration;
-      _controller.duration = Duration(milliseconds: BlinkCurve.blinkOffMs + widget.blinkOnDuration.inMilliseconds);
-      _animation.curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration);
-    }
+    if (widget.blinkOnDuration != _currentDuration) resetAnimation();
 
     ColorScheme colorScheme = Theme.of(context).colorScheme;
 
@@ -73,12 +89,14 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
 }
 
 class BlinkCurve extends Curve {
-  static const int blinkOffMs = 1000;
+  late final int durationMs;
 
   late final double threshold; // 0 to 1
-  BlinkCurve({required Duration blinkOnDuration}) {
-    int blinkOnMs = blinkOnDuration.inMilliseconds;
-    threshold = blinkOnMs / (blinkOnMs + blinkOffMs);
+  BlinkCurve({required Duration blinkOnDuration, required bool easyMode}) {
+    final int blinkOnMs = blinkOnDuration.inMilliseconds;
+    final int blinkOffMs = easyMode ? 1000 : blinkOnDuration.inMilliseconds;
+    durationMs = blinkOnMs + blinkOffMs;
+    threshold = blinkOnMs / durationMs;
   }
 
   @override
