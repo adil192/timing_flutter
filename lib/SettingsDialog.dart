@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SettingsDialog extends StatefulWidget {
@@ -10,6 +11,28 @@ class SettingsDialog extends StatefulWidget {
 }
 
 class _SettingsDialogState extends State<SettingsDialog> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  SharedPreferences? prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    _awaitPrefs();
+  }
+
+  _awaitPrefs() async {
+    if (prefs != null) return;
+    prefs = await _prefs;
+    setState(() {});
+  }
+
+  _onChanged(String key, bool? value) async {
+    if (value == null) return;
+    prefs ??= await _prefs;
+    prefs?.setBool(key, value);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -29,8 +52,8 @@ class _SettingsDialogState extends State<SettingsDialog> {
             const Spacer(),
             SettingsCheckbox(
               label: const Text("Easy mode"),
-              value: true,
-              onChanged: (bool? value) {},
+              value: prefs?.getBool('easyMode') ?? true,
+              onChanged: (bool? value) => _onChanged('easyMode', value),
             ),
             const Spacer(),
           ],
