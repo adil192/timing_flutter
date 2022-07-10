@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'dart:math';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import 'package:timing_flutter/BlinkingSquare.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:timing_flutter/SettingsDialog.dart';
+
+import 'dart:math';
 
 const defaultColor = Colors.indigo;
 
@@ -50,6 +54,10 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: ThemeMode.system,
           home: const MyHomePage(title: "Timing Trainer"),
+
+          // flutter_smart_dialog
+          navigatorObservers: [FlutterSmartDialog.observer],
+          builder: FlutterSmartDialog.init(),
         );
       },
     );
@@ -120,6 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            color: colorScheme.onPrimary,
+            iconSize: 35,
+            onPressed: () {
+              SmartDialog.show(builder: (context) => const SettingsDialog());
+            },
+          )
         ],
       ),
       body: Column(
