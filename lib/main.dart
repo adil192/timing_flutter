@@ -208,6 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     const SizedBox(width: 10),
                     ElevatedButton(
+                      autofocus: true,
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.primary),
                         foregroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.onPrimary),
