@@ -104,7 +104,9 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
         const Spacer(),
         Checkbox(
           value: widget.value,
-          onChanged: widget.onChanged
+          onChanged: widget.onChanged,
+          fillColor: MaterialStateProperty.all(colorScheme.primary),
+          checkColor: colorScheme.onPrimary,
         ),
       ],
     );
