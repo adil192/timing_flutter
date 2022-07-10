@@ -38,7 +38,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Container(
       height: 200,
-      width: 250,
+      width: 300,
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(10),
@@ -51,7 +51,8 @@ class _SettingsDialogState extends State<SettingsDialog> {
             Text("Settings", style: Theme.of(context).textTheme.headline3),
             const Spacer(),
             SettingsCheckbox(
-              label: const Text("Easy mode"),
+              label: "Easy mode",
+              hint: 'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
               value: prefs?.getBool('easyMode') ?? true,
               onChanged: (bool? value) => _onChanged('easyMode', value),
             ),
@@ -67,11 +68,13 @@ class SettingsCheckbox extends StatefulWidget {
   const SettingsCheckbox({
     Key? key,
     required this.label,
+    this.hint = "",
     required this.value,
     this.onChanged,
   }) : super(key: key);
 
-  final Text label;
+  final String label;
+  final String hint;
   final bool value;
   final ValueChanged<bool?>? onChanged;
 
@@ -83,8 +86,21 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        widget.label,
+        SizedBox(
+          width: 200,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.label),
+              Text(
+                widget.hint,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ]
+          ),
+        ),
         const Spacer(),
         Checkbox(
           value: widget.value,
