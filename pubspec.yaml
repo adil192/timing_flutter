@@ -41,6 +41,7 @@ dependencies:
 
   url_launcher: ^6.1.4
   flutter_smart_dialog: ^4.5.3+6
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
