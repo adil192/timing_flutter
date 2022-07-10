@@ -7,6 +7,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import 'package:timing_flutter/BlinkingSquare.dart';
 import 'package:timing_flutter/SettingsDialog.dart';
+import 'package:timing_flutter/keyboard.dart';
 
 import 'dart:math';
 
@@ -108,121 +109,130 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  openGithub() {
+    launchUrl(
+      githubUri,
+      mode: LaunchMode.externalApplication,
+    );
+  }
+
+  openSettings() {
+    SmartDialog.dismiss();
+    SmartDialog.show(builder: (context) => const SettingsDialog());
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title, style: TextStyle(color: colorScheme.onPrimary)),
-        toolbarHeight: 70,
-        backgroundColor: colorScheme.primary,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(EvilIcons.sc_github),
-            color: colorScheme.onPrimary,
-            iconSize: 45,
-            onPressed: () {
-              launchUrl(
-                githubUri,
-                mode: LaunchMode.externalApplication,
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.settings),
-            color: colorScheme.onPrimary,
-            iconSize: 35,
-            onPressed: () {
-              SmartDialog.show(builder: (context) => const SettingsDialog());
-            },
-          )
-        ],
-      ),
-      body: Column(
-        children: [
-          const Spacer(),
-          Center(
-            child: SizedBox(
-              width: 250,
-              child: BlinkingSquare(
-                isBlinking: !isSubmitted,
-                blinkOnDuration: Duration(milliseconds: _actualMs),
-                child: Opacity(
-                  opacity: isSubmitted ? 1 : 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(flex: 10),
-                          Text(
-                            '${_actualMs}ms',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline2?.copyWith(
-                              color: colorScheme.onPrimary,
-                            )
-                          ),
-                          const Spacer(),
-                          Text(
-                            "You were "
-                                "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
-                                " frames off with your guess of ${_guessMs}ms!",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: colorScheme.onPrimary,
-                              fontSize: 16,
-                            )
-                          ),
-                          const Spacer(flex: 10),
-                        ],
+    return ShortcutHandler(
+      openGithub: openGithub,
+      openSettings: openSettings,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title, style: TextStyle(color: colorScheme.onPrimary)),
+          toolbarHeight: 70,
+          backgroundColor: colorScheme.primary,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(EvilIcons.sc_github),
+              color: colorScheme.onPrimary,
+              iconSize: 45,
+              onPressed: openGithub,
+            ),
+            IconButton(
+              icon: const Icon(Icons.settings),
+              color: colorScheme.onPrimary,
+              iconSize: 35,
+              onPressed: openSettings,
+            )
+          ],
+        ),
+        body: Column(
+          children: [
+            const Spacer(),
+            Center(
+              child: SizedBox(
+                width: 250,
+                child: BlinkingSquare(
+                  isBlinking: !isSubmitted,
+                  blinkOnDuration: Duration(milliseconds: _actualMs),
+                  child: Opacity(
+                    opacity: isSubmitted ? 1 : 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Spacer(flex: 10),
+                            Text(
+                              '${_actualMs}ms',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.headline2?.copyWith(
+                                color: colorScheme.onPrimary,
+                              )
+                            ),
+                            const Spacer(),
+                            Text(
+                              "You were "
+                                  "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                                  " frames off with your guess of ${_guessMs}ms!",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: colorScheme.onPrimary,
+                                fontSize: 16,
+                              )
+                            ),
+                            const Spacer(flex: 10),
+                          ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              children: [
-                const Text("How long does the box above appear?"),
-                Slider(
-                    value: _sliderValue.toDouble(),
-                    min: 16,
-                    max: 500,
-                    divisions: 29,
-                    onChanged: (double value) {
-                      if (isSubmitted) return;
-                      setState(() {
-                        _sliderValue = value.round();
-                      });
-                    }
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${_sliderValue}ms',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      autofocus: true,
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.primary),
-                        foregroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.onPrimary),
-                        textStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: Column(
+                children: [
+                  const Text("How long does the box above appear?"),
+                  Slider(
+                      value: _sliderValue.toDouble(),
+                      min: 16,
+                      max: 500,
+                      divisions: 29,
+                      onChanged: (double value) {
+                        if (isSubmitted) return;
+                        setState(() {
+                          _sliderValue = value.round();
+                        });
+                      }
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        '${_sliderValue}ms',
+                        style: const TextStyle(fontSize: 16),
                       ),
-                      onPressed: _onSubmit,
-                      child: Text(isSubmitted ? reset : submit),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                        autofocus: true,
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.primary),
+                          foregroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.onPrimary),
+                          textStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
+                        ),
+                        onPressed: _onSubmit,
+                        child: Text(isSubmitted ? reset : submit),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
