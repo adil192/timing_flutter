@@ -14,5 +14,3 @@ This is a Flutter reimplementation of [timing-pwa](https://github.com/adil192/ti
   <img src="https://user-images.githubusercontent.com/21128619/177558084-5ae35196-c38b-4b7e-bb9b-ec50b1a1495f.svg" height=52 alt="Download On Flathub">
 </a>
 <br/>
-
-Note: At the time of writing, the Google Play link isn't live yet.
