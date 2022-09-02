@@ -37,10 +37,10 @@ dependencies:
 
   flutter_font_icons: ^2.2.5
 
-  dynamic_color: ^1.4.0
+  dynamic_color: ^1.5.3
 
-  url_launcher: ^6.1.4
-  flutter_smart_dialog: ^4.5.3+6
+  url_launcher: ^6.1.5
+  flutter_smart_dialog: ^4.5.4+2
   shared_preferences: ^2.0.15
 
 dev_dependencies:
