@@ -6,7 +6,7 @@
 <component type="desktop-application">
     <id>com.adilhanney.timing</id>
 
-    <name>Timing Trainer</name>
+    <name>Timing Trainer - Learn this skill!</name>
     <summary>Learn to identify sub-second timing intervals</summary>
 
     <developer_name>Adil Hanney</developer_name>
@@ -15,16 +15,27 @@
     <metadata_license>MIT</metadata_license>
     <project_license>GPL-3.0-only</project_license>
 
+    <description>
+        <p>The screen will flash for a certain time less than a second, and then you guess how long it was. As you play, you'll get better at identifying these sub-second time intervals.</p>
+    </description>
+
+    <categories>
+        <category>Game</category>
+    </categories>
+
+    <keywords>
+        <keyword>time intervals</keyword>
+        <keyword>sub-second</keyword>
+        <keyword>trainer</keyword>
+        <keyword>game</keyword>
+    </keywords>
+
     <supports>
         <control>pointing</control>
         <control>keyboard</control>
         <control>touch</control>
         <control>tablet</control>
     </supports>
-
-    <description>
-        <p>Learn to identify sub-second timing intervals.</p>
-    </description>
 
     <launchable type="desktop-id">com.adilhanney.timing.desktop</launchable>
     <screenshots>
