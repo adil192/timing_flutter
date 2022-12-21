@@ -9,7 +9,7 @@ on:
       - '**'
 
 env:
-  project-id: codes.merritt.FeelingFinder
+  project-id: com.adilhanney.timing
 
 jobs:
   build-flutter-app:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Flutter dependencies
         run: |
@@ -27,7 +27,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: beta
+          channel: stable
 
       - name: Build Flutter linux version
         run: |
@@ -39,7 +39,7 @@ jobs:
         run: tar -C build/linux/x64/release/bundle -cvf TimingFlutter-Linux-Portable.tar.gz .
 
       - name: Upload app archive for next steps
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: TimingFlutter-Archive
           path: TimingFlutter-Linux-Portable.tar.gz
@@ -49,11 +49,11 @@ jobs:
     needs: build-flutter-app
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:freedesktop-21.08
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download app archive
         uses: actions/download-artifact@v3
@@ -67,7 +67,7 @@ jobs:
           manifest-path: flatpak/com.adilhanney.timing.json
 
       - name: Upload .flatpak artifact to workflow
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Flatpak artifact
           path: TimingFlutter.flatpak
