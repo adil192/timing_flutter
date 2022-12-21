@@ -33,14 +33,14 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
 
   flutter_font_icons: ^2.2.5
 
-  dynamic_color: ^1.5.3
+  dynamic_color: ^1.5.4
 
-  url_launcher: ^6.1.5
-  flutter_smart_dialog: ^4.5.4+2
+  url_launcher: ^6.1.7
+  flutter_smart_dialog: ^4.7.2
   shared_preferences: ^2.0.15
 
 dev_dependencies:
@@ -54,7 +54,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
 
-  icons_launcher: ^1.2.1
+  icons_launcher: ^2.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,19 +98,22 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
-flutter_icons:
-  android: true
-  ios: true
-  web: true
-  macos: true
-  windows: true
-  linux: true
-
+icons_launcher:
   image_path: "assets/icon/icon.png"
-  image_path_ios: "assets/icon/icon_maskable.png"
-  image_path_macos: "assets/icon/icon_maskable.png"
-  remove_alpha_ios: true
-  remove_alpha_macos: true
-
-  adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/icon/icon_foreground.png"
+  platforms:
+    android:
+      enable: true
+      adaptive_background_color: "#ffffff"
+      adaptive_foreground_image: "assets/icon/icon_foreground.png"
+    ios:
+      enable: true
+      image_path: "assets/icon/icon_maskable.png"
+    macos:
+      enable: false
+      image_path: "assets/icon/icon_maskable.png"
+    windows:
+      enable: false
+    linux:
+      enable: false
+    web:
+      enable: true
