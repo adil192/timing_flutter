@@ -5,8 +5,8 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
-import 'package:timing_flutter/BlinkingSquare.dart';
-import 'package:timing_flutter/SettingsDialog.dart';
+import 'package:timing_flutter/blinking_square.dart';
+import 'package:timing_flutter/settings_dialogue.dart';
 import 'package:timing_flutter/keyboard.dart';
 
 import 'dart:math';
