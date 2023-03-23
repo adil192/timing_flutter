@@ -15,7 +15,7 @@ class BlinkingSquare extends StatefulWidget {
   final Duration blinkOnDuration;
 
   @override
-  _BlinkingSquareState createState() => _BlinkingSquareState();
+  State<BlinkingSquare> createState() => _BlinkingSquareState();
 }
 
 class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProviderStateMixin {
