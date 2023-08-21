@@ -38,7 +38,6 @@ dependencies:
   dynamic_color: ^1.5.4
 
   url_launcher: ^6.1.7
-  flutter_smart_dialog: ^4.7.2
   shared_preferences: ^2.0.15
 
 dev_dependencies:

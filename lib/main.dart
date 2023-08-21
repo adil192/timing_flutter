@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 import 'package:timing_flutter/blinking_square.dart';
 import 'package:timing_flutter/settings_dialogue.dart';
@@ -54,10 +53,6 @@ class MyApp extends StatelessWidget {
           ),
           themeMode: ThemeMode.system,
           home: const MyHomePage(title: "Timing Trainer"),
-
-          // flutter_smart_dialog
-          navigatorObservers: [FlutterSmartDialog.observer],
-          builder: FlutterSmartDialog.init(),
         );
       },
     );
@@ -116,8 +111,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   openSettings() {
-    SmartDialog.dismiss();
-    SmartDialog.show(builder: (context) => const SettingsDialog());
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        content: SettingsDialog(),
+      ),
+    );
   }
 
   @override

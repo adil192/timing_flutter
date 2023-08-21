@@ -36,35 +36,24 @@ class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      height: 200,
-      width: 300,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: Column(
-          children: [
-            Text(
-              "Settings",
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: colorScheme.onSurface,
-              ),
-            ),
-            const Spacer(),
-            SettingsCheckbox(
-              label: "Easy mode",
-              hint: 'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
-              value: prefs?.getBool('easyMode') ?? true,
-              onChanged: (bool? value) => _onChanged('easyMode', value),
-            ),
-            const Spacer(),
-          ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          "Settings",
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: colorScheme.onSurface,
+          ),
         ),
-      ),
+        const SizedBox(height: 16),
+        SettingsCheckbox(
+          label: "Easy mode",
+          hint: 'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
+          value: prefs?.getBool('easyMode') ?? true,
+          onChanged: (bool? value) => _onChanged('easyMode', value),
+        ),
+        const SizedBox(height: 16),
+      ],
     );
   }
 }
