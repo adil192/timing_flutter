@@ -166,7 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Text(
                               '${_actualMs}ms',
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline2?.copyWith(
+                              style: Theme.of(context).textTheme.displayMedium?.copyWith(
                                 color: colorScheme.onPrimary,
                               )
                             ),

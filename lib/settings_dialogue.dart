@@ -50,7 +50,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
           children: [
             Text(
               "Settings",
-              style: Theme.of(context).textTheme.headline3?.copyWith(
+              style: Theme.of(context).textTheme.displaySmall?.copyWith(
                 color: colorScheme.onSurface,
               ),
             ),
