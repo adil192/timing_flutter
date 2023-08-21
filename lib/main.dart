@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -134,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: colorScheme.primary,
           actions: <Widget>[
             IconButton(
-              icon: const Icon(EvilIcons.sc_github),
+              icon: const Icon(Icons.code),
               color: colorScheme.onPrimary,
               iconSize: 45,
               onPressed: openGithub,
