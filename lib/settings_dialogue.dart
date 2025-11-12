@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class SettingsDialog extends StatefulWidget {
   const SettingsDialog({super.key});
@@ -41,14 +39,15 @@ class _SettingsDialogState extends State<SettingsDialog> {
       children: [
         Text(
           "Settings",
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.displaySmall?.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 16),
         SettingsCheckbox(
           label: "Easy mode",
-          hint: 'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
+          hint:
+              'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
           value: prefs?.getBool('easyMode') ?? true,
           onChanged: (bool? value) => _onChanged('easyMode', value),
         ),
@@ -75,6 +74,7 @@ class SettingsCheckbox extends StatefulWidget {
   @override
   State<SettingsCheckbox> createState() => _SettingsCheckboxState();
 }
+
 class _SettingsCheckboxState extends State<SettingsCheckbox> {
   @override
   Widget build(BuildContext context) {
@@ -88,11 +88,8 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(widget.label),
-              Text(
-                widget.hint,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ]
+              Text(widget.hint, style: Theme.of(context).textTheme.bodySmall),
+            ],
           ),
         ),
         const Spacer(),

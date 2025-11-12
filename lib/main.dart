@@ -32,9 +32,7 @@ class MyApp extends StatelessWidget {
           darkColorScheme = darkDynamic.harmonized();
         } else {
           // Otherwise, use fallback schemes.
-          lightColorScheme = ColorScheme.fromSeed(
-            seedColor: defaultColor,
-          );
+          lightColorScheme = ColorScheme.fromSeed(seedColor: defaultColor);
           darkColorScheme = ColorScheme.fromSeed(
             seedColor: defaultColor,
             brightness: Brightness.dark,
@@ -43,10 +41,7 @@ class MyApp extends StatelessWidget {
 
         return MaterialApp(
           title: 'Timing Trainer',
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: lightColorScheme,
-          ),
+          theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
           darkTheme: ThemeData(
             useMaterial3: true,
             colorScheme: darkColorScheme,
@@ -69,7 +64,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int _actualMs = 500;
   int _guessMs = 0;
   int _sliderValue = 250;
@@ -79,7 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
   static const String submit = "Submit";
   static const String reset = "Reset";
 
-  static final Uri githubUri = Uri.parse("https://github.com/adil192/timing_flutter");
+  static final Uri githubUri = Uri.parse(
+    "https://github.com/adil192/timing_flutter",
+  );
 
   @override
   initState() {
@@ -97,25 +93,21 @@ class _MyHomePageState extends State<MyHomePage> {
       isSubmitted = !isSubmitted;
       if (isSubmitted) {
         _guessMs = _sliderValue;
-      } else { // Reset
+      } else {
+        // Reset
         _chooseMs();
       }
     });
   }
 
   void openGithub() {
-    launchUrl(
-      githubUri,
-      mode: LaunchMode.externalApplication,
-    );
+    launchUrl(githubUri, mode: LaunchMode.externalApplication);
   }
 
   void openSettings() {
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        content: SettingsDialog(),
-      ),
+      builder: (context) => const AlertDialog(content: SettingsDialog()),
     );
   }
 
@@ -127,7 +119,10 @@ class _MyHomePageState extends State<MyHomePage> {
       openSettings: openSettings,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.title, style: TextStyle(color: colorScheme.onPrimary)),
+          title: Text(
+            widget.title,
+            style: TextStyle(color: colorScheme.onPrimary),
+          ),
           toolbarHeight: 70,
           backgroundColor: colorScheme.primary,
           actions: <Widget>[
@@ -142,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: colorScheme.onPrimary,
               iconSize: 35,
               onPressed: openSettings,
-            )
+            ),
           ],
         ),
         body: Column(
@@ -159,29 +154,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Spacer(flex: 10),
-                            Text(
-                              '${_actualMs}ms',
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                                color: colorScheme.onPrimary,
-                              )
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Spacer(flex: 10),
+                          Text(
+                            '${_actualMs}ms',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.displayMedium
+                                ?.copyWith(color: colorScheme.onPrimary),
+                          ),
+                          const Spacer(),
+                          Text(
+                            "You were "
+                            "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                            " frames off with your guess of ${_guessMs}ms!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: colorScheme.onPrimary,
+                              fontSize: 16,
                             ),
-                            const Spacer(),
-                            Text(
-                              "You were "
-                                  "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
-                                  " frames off with your guess of ${_guessMs}ms!",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: colorScheme.onPrimary,
-                                fontSize: 16,
-                              )
-                            ),
-                            const Spacer(flex: 10),
-                          ],
+                          ),
+                          const Spacer(flex: 10),
+                        ],
                       ),
                     ),
                   ),
@@ -195,16 +189,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   const Text("How long does the box above appear?"),
                   Slider(
-                      value: _sliderValue.toDouble(),
-                      min: 16,
-                      max: 500,
-                      divisions: 29,
-                      onChanged: (double value) {
-                        if (isSubmitted) return;
-                        setState(() {
-                          _sliderValue = value.round();
-                        });
-                      }
+                    value: _sliderValue.toDouble(),
+                    min: 16,
+                    max: 500,
+                    divisions: 29,
+                    onChanged: (double value) {
+                      if (isSubmitted) return;
+                      setState(() {
+                        _sliderValue = value.round();
+                      });
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -217,22 +211,27 @@ class _MyHomePageState extends State<MyHomePage> {
                       ElevatedButton(
                         autofocus: true,
                         style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.resolveWith((states) => colorScheme.primary),
-                          foregroundColor: WidgetStateProperty.resolveWith((states) => colorScheme.onPrimary),
-                          textStyle: WidgetStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
+                          backgroundColor: WidgetStateProperty.resolveWith(
+                            (states) => colorScheme.primary,
+                          ),
+                          foregroundColor: WidgetStateProperty.resolveWith(
+                            (states) => colorScheme.onPrimary,
+                          ),
+                          textStyle: WidgetStateProperty.resolveWith(
+                            (states) => const TextStyle(fontSize: 16),
+                          ),
                         ),
                         onPressed: _onSubmit,
                         child: Text(isSubmitted ? reset : submit),
-                      )
+                      ),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
-
 }

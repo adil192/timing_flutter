@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +17,8 @@ class BlinkingSquare extends StatefulWidget {
   State<BlinkingSquare> createState() => _BlinkingSquareState();
 }
 
-class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProviderStateMixin {
+class _BlinkingSquareState extends State<BlinkingSquare>
+    with SingleTickerProviderStateMixin {
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   SharedPreferences? prefs;
 
@@ -36,11 +36,15 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
 
     _awaitPrefs();
 
-    _controller = AnimationController(duration: const Duration(milliseconds: 0), vsync: this);
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 0),
+      vsync: this,
+    );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
     resetAnimation();
     _animation.addListener(() {
-      if (_animation.value == _lastAnimationValue) return; // don't setSate if not changed
+      // don't setSate if not changed
+      if (_animation.value == _lastAnimationValue) return;
       setState(() {
         _lastAnimationValue = _animation.value;
       });
@@ -58,7 +62,10 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
 
   void resetAnimation() {
     _currentDuration = widget.blinkOnDuration;
-    BlinkCurve curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration, easyMode: prefs?.getBool('easyMode') ?? true);
+    BlinkCurve curve = BlinkCurve(
+      blinkOnDuration: widget.blinkOnDuration,
+      easyMode: prefs?.getBool('easyMode') ?? true,
+    );
     _animation.curve = curve;
     _controller.duration = Duration(milliseconds: curve.durationMs);
   }

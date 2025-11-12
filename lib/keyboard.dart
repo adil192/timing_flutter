@@ -4,10 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SettingsIntent extends Intent {}
-final controlS = LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyS);
+
+final controlS = LogicalKeySet(
+  LogicalKeyboardKey.control,
+  LogicalKeyboardKey.keyS,
+);
 final metaS = LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyS);
+
 class GithubIntent extends Intent {}
-final controlG = LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.keyG);
+
+final controlG = LogicalKeySet(
+  LogicalKeyboardKey.control,
+  LogicalKeyboardKey.keyG,
+);
 final metaG = LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyG);
 
 class ShortcutHandler extends StatelessWidget {
