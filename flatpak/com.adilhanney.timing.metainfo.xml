@@ -52,6 +52,19 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="1.0.15" date="2025-11-12">
+            <description>
+                <ul>
+                    <li>Performance improvements and code cleanup</li>
+                    <li>Fixed a bug where the actual and guessed times could be 1ms different.</li>
+                    <li>Switched to server-side window decorations for wider compatibility</li>
+                    <li>Added builds for arm64 Linux systems</li>
+                    <li>Updated dependencies</li>
+                    <li>Updated to a non-deprecated Flatpak runtime</li>
+                    <li>Added desktop screenshots to Flathub listing</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.14" date="2023-08-21">
             <description>
                 <p>1. Updated dependencies</p>

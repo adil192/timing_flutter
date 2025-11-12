@@ -2,7 +2,7 @@ name: timing_flutter
 description: Learn to identify sub-second timing intervals.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.14+14
+version: 1.0.15+15
 
 environment:
   sdk: ">=3.9.0 <4.0.0"
