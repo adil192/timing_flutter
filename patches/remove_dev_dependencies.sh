@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "No dev dependencies to remove."
+echo "Removing golden_screenshot from pubspec.yaml"
+sed -i -e "/golden_screenshot/d" pubspec.yaml

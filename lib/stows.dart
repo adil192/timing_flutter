@@ -7,5 +7,5 @@ class Stows {
   /// Useful for testing. Set to false in production.
   static bool volatile = true;
 
-  final easyMode = PlainStow('easyMode', true);
+  final easyMode = PlainStow('easyMode', true, volatile: volatile);
 }

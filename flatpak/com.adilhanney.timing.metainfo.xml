@@ -40,7 +40,12 @@
     <launchable type="desktop-id">com.adilhanney.timing.desktop</launchable>
     <screenshots>
         <screenshot type="default">
-            <image>https://raw.githubusercontent.com/adil192/timing_flutter/main/assets/screenshots/screenshot_results.png</image>
+            <caption>Guess the timing interval! In this screenshot, the user guessed 400ms which is very close to the actual time of 417ms.</caption>
+            <image>https://raw.githubusercontent.com/adil192/timing_flutter/main/metadata/en-US/images/flathubScreenshots/1_guess.png</image>
+        </screenshot>
+        <screenshot>
+            <caption>Use the settings page to configure the difficulty of the game.</caption>
+            <image>https://raw.githubusercontent.com/adil192/timing_flutter/main/metadata/en-US/images/flathubScreenshots/2_settings.png</image>
         </screenshot>
     </screenshots>
 

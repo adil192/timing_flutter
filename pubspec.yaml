@@ -24,6 +24,8 @@ dev_dependencies:
 
   icons_launcher: ^3.0.3
 
+  golden_screenshot: ^8.1.0
+
 flutter:
   uses-material-design: true
 

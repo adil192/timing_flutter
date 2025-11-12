@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           title: 'Timing Trainer',
           theme: ThemeData(colorScheme: lightColorScheme),
           darkTheme: ThemeData(colorScheme: darkColorScheme),
-          home: const MyHomePage(title: "Timing Trainer"),
+          home: const MyHomePage(),
         );
       },
     );
@@ -46,15 +46,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   int _actualMs = 500;
   int _guessMs = 0;
   int _sliderValue = 250;
@@ -77,6 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void _chooseMs() {
     _actualMs = (16 + Random().nextInt(30) * 1000 / 60).round();
     if (_actualMs > 500) _actualMs = 500; // fix bug on web
+  }
+
+  @visibleForTesting
+  void populateTestData(int actualMs, int guessMs) {
+    _actualMs = actualMs;
+    _guessMs = guessMs;
+    _sliderValue = guessMs;
+    isSubmitted = true;
+    if (mounted) setState(() {});
   }
 
   void _onSubmit() {
@@ -111,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            widget.title,
+            'Timing Trainer',
             style: TextStyle(color: colorScheme.onPrimary),
           ),
           toolbarHeight: 70,
@@ -201,19 +208,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       const SizedBox(width: 10),
                       ElevatedButton(
                         autofocus: true,
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.resolveWith(
-                            (states) => colorScheme.primary,
-                          ),
-                          foregroundColor: WidgetStateProperty.resolveWith(
-                            (states) => colorScheme.onPrimary,
-                          ),
-                          textStyle: WidgetStateProperty.resolveWith(
-                            (states) => const TextStyle(fontSize: 16),
-                          ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
                         ),
                         onPressed: _onSubmit,
-                        child: Text(isSubmitted ? reset : submit),
+                        child: Text(
+                          isSubmitted ? reset : submit,
+                          style: const TextStyle(fontSize: 16),
+                        ),
                       ),
                     ],
                   ),
