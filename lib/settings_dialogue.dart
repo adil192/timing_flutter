@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timing_flutter/stows.dart';
 
 class SettingsDialog extends StatefulWidget {
   const SettingsDialog({super.key});
@@ -9,26 +9,9 @@ class SettingsDialog extends StatefulWidget {
 }
 
 class _SettingsDialogState extends State<SettingsDialog> {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  SharedPreferences? prefs;
-
   @override
   void initState() {
     super.initState();
-    _awaitPrefs();
-  }
-
-  Future<void> _awaitPrefs() async {
-    if (prefs != null) return;
-    prefs = await _prefs;
-    setState(() {});
-  }
-
-  Future<void> _onChanged(String key, bool? value) async {
-    if (value == null) return;
-    prefs ??= await _prefs;
-    prefs?.setBool(key, value);
-    setState(() {});
   }
 
   @override
@@ -44,12 +27,17 @@ class _SettingsDialogState extends State<SettingsDialog> {
           ).textTheme.displaySmall?.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 16),
-        SettingsCheckbox(
-          label: "Easy mode",
-          hint:
-              'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
-          value: prefs?.getBool('easyMode') ?? true,
-          onChanged: (bool? value) => _onChanged('easyMode', value),
+        ValueListenableBuilder(
+          valueListenable: stows.easyMode,
+          builder: (context, _, _) {
+            return SettingsCheckbox(
+              label: "Easy mode",
+              hint:
+                  'Keep a constant "off" duration of 1 second rather than the same as the "on" duration.',
+              value: stows.easyMode.value,
+              onChanged: (value) => stows.easyMode.value = value,
+            );
+          },
         ),
         const SizedBox(height: 16),
       ],
@@ -69,7 +57,7 @@ class SettingsCheckbox extends StatefulWidget {
   final String label;
   final String hint;
   final bool value;
-  final ValueChanged<bool?>? onChanged;
+  final ValueChanged<bool>? onChanged;
 
   @override
   State<SettingsCheckbox> createState() => _SettingsCheckboxState();
@@ -95,7 +83,7 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
         const Spacer(),
         Checkbox(
           value: widget.value,
-          onChanged: widget.onChanged,
+          onChanged: (value) => widget.onChanged?.call(value!),
           fillColor: WidgetStateProperty.all(colorScheme.primary),
           checkColor: colorScheme.onPrimary,
         ),

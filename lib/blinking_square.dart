@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timing_flutter/stows.dart';
 
 class BlinkingSquare extends StatefulWidget {
   const BlinkingSquare({
@@ -19,9 +19,6 @@ class BlinkingSquare extends StatefulWidget {
 
 class _BlinkingSquareState extends State<BlinkingSquare>
     with SingleTickerProviderStateMixin {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  SharedPreferences? prefs;
-
   late AnimationController _controller;
   late CurvedAnimation _animation;
 
@@ -33,8 +30,6 @@ class _BlinkingSquareState extends State<BlinkingSquare>
   @override
   void initState() {
     super.initState();
-
-    _awaitPrefs();
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 0),
@@ -52,19 +47,11 @@ class _BlinkingSquareState extends State<BlinkingSquare>
     _controller.repeat(reverse: false);
   }
 
-  Future<void> _awaitPrefs() async {
-    if (prefs != null) return;
-    prefs = await _prefs;
-    setState(() {
-      _currentDuration = const Duration(milliseconds: 0); // force update
-    });
-  }
-
   void resetAnimation() {
     _currentDuration = widget.blinkOnDuration;
     BlinkCurve curve = BlinkCurve(
       blinkOnDuration: widget.blinkOnDuration,
-      easyMode: prefs?.getBool('easyMode') ?? true,
+      easyMode: stows.easyMode.value,
     );
     _animation.curve = curve;
     _controller.duration = Duration(milliseconds: curve.durationMs);

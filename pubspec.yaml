@@ -38,7 +38,7 @@ dependencies:
   dynamic_color: ^1.5.4
 
   url_launcher: ^6.1.7
-  shared_preferences: ^2.0.15
+  stow_plain: ^0.5.1
 
 dev_dependencies:
   flutter_test:

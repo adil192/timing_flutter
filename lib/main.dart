@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:timing_flutter/stows.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:timing_flutter/blinking_square.dart';
@@ -12,6 +13,7 @@ import 'dart:math';
 const defaultColor = Colors.indigo;
 
 void main() {
+  Stows.volatile = false;
   runApp(const MyApp());
 }
 
