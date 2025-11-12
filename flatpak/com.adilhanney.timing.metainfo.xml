@@ -6,7 +6,7 @@
 <component type="desktop-application">
     <id>com.adilhanney.timing</id>
 
-    <name>Timing Trainer - Learn this skill!</name>
+    <name>Timing Trainer</name>
     <summary>Learn to identify sub-second timing intervals</summary>
 
     <developer_name>Adil Hanney</developer_name>
