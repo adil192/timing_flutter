@@ -110,3 +110,42 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ steps.compress.outputs.archiveName }}
+
+  build-flatpak:
+    name: Build Flatpak
+    needs: build-linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
+      options: --privileged
+    steps:
+      - name: Checkout flathub repo
+        uses: actions/checkout@v5
+        with:
+          repository: flathub/com.adilhanney.timing
+          submodules: recursive
+
+      - name: Download app archive
+        uses: actions/download-artifact@v6
+        with:
+          name: TimingFlutter-Archive-x86_64
+
+      - name: Rename app archive
+        run: |
+          mv TimingFlutter_*.tar.gz TimingFlutter_snapshot.tar.gz
+
+      - name: Patch manifest to use local archive
+        run: |
+          # Add --no-same-owner to tar in build-commands
+          jq '.modules? |= map(if type=="object" and .name=="timing_flutter" then .["build-commands"] |= map(if type=="string" then sub("tar -xf "; "tar --no-same-owner -xf ") else . end) else . end)' com.adilhanney.timing.json > tmp.json && mv tmp.json com.adilhanney.timing.json
+
+          # Replace sources with local archive
+          jq '.modules[]? |= if type=="object" and .name=="timing_flutter" then .sources = [ {"type":"file","path":"./TimingFlutter_snapshot.tar.gz"} ] else . end' com.adilhanney.timing.json > tmp.json && mv tmp.json com.adilhanney.timing.json
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: TimingFlutter_snapshot.flatpak
+          manifest-path: com.adilhanney.timing.json
+          upload-artifact: true
