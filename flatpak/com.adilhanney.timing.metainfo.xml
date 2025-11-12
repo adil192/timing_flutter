@@ -15,6 +15,11 @@
     <metadata_license>MIT</metadata_license>
     <project_license>GPL-3.0-only</project_license>
 
+    <branding>
+        <color type="primary" scheme_preference="light">#bac3ff</color>
+        <color type="primary" scheme_preference="dark">#1f2b6c</color>
+    </branding>
+
     <description>
         <p>The screen will flash for a certain time less than a second, and then you guess how long it was. As you play, you'll get better at identifying these sub-second time intervals.</p>
     </description>
