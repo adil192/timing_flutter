@@ -20,35 +20,24 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  static const title = 'Complete example';
-
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
-      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-        ColorScheme lightColorScheme;
-        ColorScheme darkColorScheme;
-
-        if (lightDynamic != null && darkDynamic != null) {
-          lightColorScheme = lightDynamic.harmonized();
-          darkColorScheme = darkDynamic.harmonized();
-        } else {
-          // Otherwise, use fallback schemes.
-          lightColorScheme = ColorScheme.fromSeed(seedColor: defaultColor);
-          darkColorScheme = ColorScheme.fromSeed(
-            seedColor: defaultColor,
-            brightness: Brightness.dark,
-          );
-        }
+      builder: (lightDynamic, darkDynamic) {
+        final lightColorScheme =
+            lightDynamic?.harmonized() ??
+            ColorScheme.fromSeed(seedColor: defaultColor);
+        final darkColorScheme =
+            darkDynamic?.harmonized() ??
+            ColorScheme.fromSeed(
+              seedColor: defaultColor,
+              brightness: Brightness.dark,
+            );
 
         return MaterialApp(
           title: 'Timing Trainer',
-          theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
-          darkTheme: ThemeData(
-            useMaterial3: true,
-            colorScheme: darkColorScheme,
-          ),
-          themeMode: ThemeMode.system,
+          theme: ThemeData(colorScheme: lightColorScheme),
+          darkTheme: ThemeData(colorScheme: darkColorScheme),
           home: const MyHomePage(title: "Timing Trainer"),
         );
       },
