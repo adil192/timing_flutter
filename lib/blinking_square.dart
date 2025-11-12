@@ -20,22 +20,20 @@ class BlinkingSquare extends StatefulWidget {
 class _BlinkingSquareState extends State<BlinkingSquare>
     with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(vsync: this);
-  late var _tween = BlinkTween(blinkOnDuration: Duration.zero, easyMode: true);
+  late _OpacityTween _tween;
 
-  /// Animation that outputs true when the square should be visible.
-  late var _animation = _tween.animate(_controller);
+  /// Animation that outputs 1 when the square should be visible.
+  late Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
     _updateAnimation();
-    _animation.addListener(_onBlink);
     _controller.repeat(reverse: false);
   }
 
   @override
   void dispose() {
-    _animation.removeListener(_onBlink);
     _controller.dispose();
     super.dispose();
   }
@@ -50,20 +48,14 @@ class _BlinkingSquareState extends State<BlinkingSquare>
   }
 
   void _updateAnimation() {
-    _tween = BlinkTween(
+    _tween = _OpacityTween(
       blinkOnDuration: widget.blinkOnDuration,
       easyMode: stows.easyMode.value,
     );
     _controller.duration = Duration(milliseconds: _tween.periodMs);
-    _animation.removeListener(_onBlink);
-    _animation = widget.isBlinking
+    _opacityAnimation = widget.isBlinking
         ? _tween.animate(_controller)
-        : AlwaysStoppedAnimation(true);
-    _animation.addListener(_onBlink);
-  }
-
-  void _onBlink() {
-    if (mounted) setState(() {});
+        : AlwaysStoppedAnimation(1.0);
   }
 
   @override
@@ -71,22 +63,25 @@ class _BlinkingSquareState extends State<BlinkingSquare>
     final colorScheme = ColorScheme.of(context);
     return AspectRatio(
       aspectRatio: 1,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          color: _animation.value ? colorScheme.primary : Colors.transparent,
+      child: FadeTransition(
+        opacity: _opacityAnimation,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            color: colorScheme.primary,
+          ),
+          child: widget.child,
         ),
-        child: widget.child,
       ),
     );
   }
 }
 
-class BlinkTween extends Tween<bool> {
+class _OpacityTween extends Tween<double> {
   late final int periodMs;
   late final double threshold; // 0 to 1
-  BlinkTween({required Duration blinkOnDuration, required bool easyMode})
-    : super(begin: true, end: false) {
+  _OpacityTween({required Duration blinkOnDuration, required bool easyMode})
+    : super(begin: 1, end: 0) {
     final int blinkOnMs = blinkOnDuration.inMilliseconds;
     final int blinkOffMs = easyMode ? 1000 : blinkOnDuration.inMilliseconds;
     periodMs = blinkOnMs + blinkOffMs;
@@ -94,7 +89,7 @@ class BlinkTween extends Tween<bool> {
   }
 
   @override
-  bool lerp(double t) {
+  double lerp(double t) {
     return t < threshold ? begin! : end!;
   }
 }
