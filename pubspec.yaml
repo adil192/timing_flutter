@@ -95,6 +95,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
+# dart run icons_launcher:create
 icons_launcher:
   image_path: "assets/icon/icon.png"
   platforms:
