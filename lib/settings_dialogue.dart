@@ -16,15 +16,15 @@ class _SettingsDialogState extends State<SettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = ColorScheme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           "Settings",
-          style: Theme.of(
+          style: TextTheme.of(
             context,
-          ).textTheme.displaySmall?.copyWith(color: colorScheme.onSurface),
+          ).displaySmall?.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 16),
         ValueListenableBuilder(
@@ -66,7 +66,7 @@ class SettingsCheckbox extends StatefulWidget {
 class _SettingsCheckboxState extends State<SettingsCheckbox> {
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = ColorScheme.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -76,7 +76,7 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(widget.label),
-              Text(widget.hint, style: Theme.of(context).textTheme.bodySmall),
+              Text(widget.hint, style: TextTheme.of(context).bodySmall),
             ],
           ),
         ),

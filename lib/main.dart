@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = ColorScheme.of(context);
     return ShortcutHandler(
       openGithub: openGithub,
       openSettings: openSettings,
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Text(
                             '${_actualMs}ms',
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.displayMedium
+                            style: TextTheme.of(context).displayMedium
                                 ?.copyWith(color: colorScheme.onPrimary),
                           ),
                           const Spacer(),
