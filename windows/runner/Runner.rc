@@ -93,7 +93,7 @@ BEGIN
             VALUE "FileDescription", "Timing Trainer" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "Timing Trainer" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.adilhanney.timing. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 Adil Hanney. All rights reserved." "\0"
             VALUE "OriginalFilename", "timing_flutter.exe" "\0"
             VALUE "ProductName", "Timing Flutter" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
