@@ -16,7 +16,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   static const title = 'Complete example';
 
@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -87,12 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
     _chooseMs();
   }
 
-  _chooseMs() {
+  void _chooseMs() {
     _actualMs = (16 + Random().nextInt(30) * 1000 / 60).ceil();
     if (_actualMs > 500) _actualMs = 500; // fix bug on web
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     setState(() {
       isSubmitted = !isSubmitted;
       if (isSubmitted) {
@@ -103,14 +103,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  openGithub() {
+  void openGithub() {
     launchUrl(
       githubUri,
       mode: LaunchMode.externalApplication,
     );
   }
 
-  openSettings() {
+  void openSettings() {
     showDialog(
       context: context,
       builder: (context) => const AlertDialog(
@@ -217,9 +217,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       ElevatedButton(
                         autofocus: true,
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.primary),
-                          foregroundColor: MaterialStateProperty.resolveWith((states) => colorScheme.onPrimary),
-                          textStyle: MaterialStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
+                          backgroundColor: WidgetStateProperty.resolveWith((states) => colorScheme.primary),
+                          foregroundColor: WidgetStateProperty.resolveWith((states) => colorScheme.onPrimary),
+                          textStyle: WidgetStateProperty.resolveWith((states) => const TextStyle(fontSize: 16)),
                         ),
                         onPressed: _onSubmit,
                         child: Text(isSubmitted ? reset : submit),

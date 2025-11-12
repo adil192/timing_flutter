@@ -12,11 +12,11 @@ final metaG = LogicalKeySet(LogicalKeyboardKey.meta, LogicalKeyboardKey.keyG);
 
 class ShortcutHandler extends StatelessWidget {
   const ShortcutHandler({
-    Key? key,
+    super.key,
     required this.child,
     this.openSettings,
     this.openGithub,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final VoidCallback? openSettings;

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SettingsDialog extends StatefulWidget {
-  const SettingsDialog({Key? key}) : super(key: key);
+  const SettingsDialog({super.key});
 
   @override
   State<SettingsDialog> createState() => _SettingsDialogState();
@@ -20,13 +20,13 @@ class _SettingsDialogState extends State<SettingsDialog> {
     _awaitPrefs();
   }
 
-  _awaitPrefs() async {
+  Future<void> _awaitPrefs() async {
     if (prefs != null) return;
     prefs = await _prefs;
     setState(() {});
   }
 
-  _onChanged(String key, bool? value) async {
+  Future<void> _onChanged(String key, bool? value) async {
     if (value == null) return;
     prefs ??= await _prefs;
     prefs?.setBool(key, value);
@@ -60,12 +60,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
 
 class SettingsCheckbox extends StatefulWidget {
   const SettingsCheckbox({
-    Key? key,
+    super.key,
     required this.label,
     this.hint = "",
     required this.value,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   final String label;
   final String hint;
@@ -99,7 +99,7 @@ class _SettingsCheckboxState extends State<SettingsCheckbox> {
         Checkbox(
           value: widget.value,
           onChanged: widget.onChanged,
-          fillColor: MaterialStateProperty.all(colorScheme.primary),
+          fillColor: WidgetStateProperty.all(colorScheme.primary),
           checkColor: colorScheme.onPrimary,
         ),
       ],

@@ -4,11 +4,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class BlinkingSquare extends StatefulWidget {
   const BlinkingSquare({
-    Key? key,
+    super.key,
     required this.child,
     this.isBlinking = false,
     this.blinkOnDuration = const Duration(milliseconds: 500),
-  }) : super(key: key);
+  });
 
   final Widget child;
   final bool isBlinking;
@@ -48,7 +48,7 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
     _controller.repeat(reverse: false);
   }
 
-  _awaitPrefs() async {
+  Future<void> _awaitPrefs() async {
     if (prefs != null) return;
     prefs = await _prefs;
     setState(() {
@@ -56,7 +56,7 @@ class _BlinkingSquareState extends State<BlinkingSquare> with SingleTickerProvid
     });
   }
 
-  resetAnimation() {
+  void resetAnimation() {
     _currentDuration = widget.blinkOnDuration;
     BlinkCurve curve = BlinkCurve(blinkOnDuration: widget.blinkOnDuration, easyMode: prefs?.getBool('easyMode') ?? true);
     _animation.curve = curve;
