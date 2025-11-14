@@ -6,7 +6,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:timing_flutter/blinking_square.dart';
 import 'package:timing_flutter/settings_dialogue.dart';
-import 'package:timing_flutter/keyboard.dart';
 
 import 'dart:math';
 
@@ -112,119 +111,116 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    return ShortcutHandler(
-      openGithub: openGithub,
-      openSettings: openSettings,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Timing Trainer',
-            style: TextStyle(color: colorScheme.onPrimary),
-          ),
-          toolbarHeight: 70,
-          backgroundColor: colorScheme.primary,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.code),
-              color: colorScheme.onPrimary,
-              iconSize: 45,
-              onPressed: openGithub,
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings),
-              color: colorScheme.onPrimary,
-              iconSize: 35,
-              onPressed: openSettings,
-            ),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Timing Trainer',
+          style: TextStyle(color: colorScheme.onPrimary),
         ),
-        body: Column(
-          children: [
-            const Spacer(),
-            Center(
-              child: SizedBox(
-                width: 250,
-                child: BlinkingSquare(
-                  isBlinking: !isSubmitted,
-                  blinkOnDuration: Duration(milliseconds: _actualMs),
-                  child: Opacity(
-                    opacity: isSubmitted ? 1 : 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(flex: 10),
-                          Text(
-                            '${_actualMs}ms',
-                            textAlign: TextAlign.center,
-                            style: TextTheme.of(context).displayMedium
-                                ?.copyWith(color: colorScheme.onPrimary),
+        toolbarHeight: 70,
+        backgroundColor: colorScheme.primary,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.code),
+            color: colorScheme.onPrimary,
+            iconSize: 45,
+            onPressed: openGithub,
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            color: colorScheme.onPrimary,
+            iconSize: 35,
+            onPressed: openSettings,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Spacer(),
+          Center(
+            child: SizedBox(
+              width: 250,
+              child: BlinkingSquare(
+                isBlinking: !isSubmitted,
+                blinkOnDuration: Duration(milliseconds: _actualMs),
+                child: Opacity(
+                  opacity: isSubmitted ? 1 : 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(flex: 10),
+                        Text(
+                          '${_actualMs}ms',
+                          textAlign: TextAlign.center,
+                          style: TextTheme.of(context).displayMedium?.copyWith(
+                            color: colorScheme.onPrimary,
                           ),
-                          const Spacer(),
-                          Text(
-                            "You were "
-                            "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
-                            " frames off with your guess of ${_guessMs}ms!",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: colorScheme.onPrimary,
-                              fontSize: 16,
-                            ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          "You were "
+                          "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                          " frames off with your guess of ${_guessMs}ms!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: colorScheme.onPrimary,
+                            fontSize: 16,
                           ),
-                          const Spacer(flex: 10),
-                        ],
-                      ),
+                        ),
+                        const Spacer(flex: 10),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-              child: Column(
-                children: [
-                  const Text("How long does the box above appear?"),
-                  Slider(
-                    value: _sliderValue.toDouble(),
-                    min: 16,
-                    max: 500,
-                    divisions: 29,
-                    onChanged: (double value) {
-                      if (isSubmitted) return;
-                      setState(() {
-                        _sliderValue = value.round();
-                      });
-                    },
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        '${_sliderValue}ms',
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            child: Column(
+              children: [
+                const Text("How long does the box above appear?"),
+                Slider(
+                  value: _sliderValue.toDouble(),
+                  min: 16,
+                  max: 500,
+                  divisions: 29,
+                  onChanged: (double value) {
+                    if (isSubmitted) return;
+                    setState(() {
+                      _sliderValue = value.round();
+                    });
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${_sliderValue}ms',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(width: 10),
+                    ElevatedButton(
+                      autofocus: true,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorScheme.primary,
+                        foregroundColor: colorScheme.onPrimary,
+                      ),
+                      onPressed: _onSubmit,
+                      child: Text(
+                        isSubmitted ? reset : submit,
                         style: const TextStyle(fontSize: 16),
                       ),
-                      const SizedBox(width: 10),
-                      ElevatedButton(
-                        autofocus: true,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: colorScheme.primary,
-                          foregroundColor: colorScheme.onPrimary,
-                        ),
-                        onPressed: _onSubmit,
-                        child: Text(
-                          isSubmitted ? reset : submit,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
