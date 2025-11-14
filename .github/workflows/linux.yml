@@ -18,12 +18,12 @@ jobs:
       matrix:
         arch:
           - runs-on: ubuntu-latest
-            cache-name: TimingFlutter
+            cache-name: TimingTrainer
             target-platform: linux-x64
             flutter-output-folder: build/linux/x64/release/bundle
             archive-suffix: x86_64
           - runs-on: ubuntu-24.04-arm
-            cache-name: TimingFlutterArm64
+            cache-name: TimingTrainerArm64
             target-platform: linux-arm64
             flutter-output-folder: build/linux/arm64/release/bundle
             archive-suffix: arm64
@@ -61,11 +61,10 @@ jobs:
       - name: Remove dev dependencies
         run: ./patches/remove_dev_dependencies.sh
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - name: Setup Flutter submodule
+        uses: adil192/setup-flutter-submodule@v1
         with:
-          channel: master
-          flutter-version: 3.38.1
+          flutter-path: submodules/flutter
 
       - name: Disable Flutter CLI animations
         run: flutter config --no-cli-animations
@@ -81,7 +80,7 @@ jobs:
         id: compress
         run: |
           buildName=$(grep -oP '(?<=version: ).*(?=\+)' pubspec.yaml)
-          archiveName="TimingFlutter_v${buildName}_Linux_${{ matrix.arch.archive-suffix }}.tar.gz"
+          archiveName="TimingTrainer_v${buildName}_Linux_${{ matrix.arch.archive-suffix }}.tar.gz"
           echo "archiveName=$archiveName" >> $GITHUB_OUTPUT
 
           mkdir -p AppDir
@@ -101,7 +100,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v5
         with:
-          name: TimingFlutter-Archive-${{ matrix.arch.archive-suffix }}
+          name: TimingTrainer-Archive-${{ matrix.arch.archive-suffix }}
           path: ${{ steps.compress.outputs.archiveName }}
 
       - name: Upload to GitHub release
@@ -129,11 +128,11 @@ jobs:
       - name: Download app archive
         uses: actions/download-artifact@v6
         with:
-          name: TimingFlutter-Archive-x86_64
+          name: TimingTrainer-Archive-x86_64
 
       - name: Rename app archive
         run: |
-          mv TimingFlutter_*.tar.gz TimingFlutter_snapshot.tar.gz
+          mv TimingTrainer_*.tar.gz TimingTrainer_snapshot.tar.gz
 
       - name: Patch manifest to use local archive
         run: |
@@ -141,11 +140,11 @@ jobs:
           jq '.modules? |= map(if type=="object" and .name=="timing_flutter" then .["build-commands"] |= map(if type=="string" then sub("tar -xf "; "tar --no-same-owner -xf ") else . end) else . end)' com.adilhanney.timing.json > tmp.json && mv tmp.json com.adilhanney.timing.json
 
           # Replace sources with local archive
-          jq '.modules[]? |= if type=="object" and .name=="timing_flutter" then .sources = [ {"type":"file","path":"./TimingFlutter_snapshot.tar.gz"} ] else . end' com.adilhanney.timing.json > tmp.json && mv tmp.json com.adilhanney.timing.json
+          jq '.modules[]? |= if type=="object" and .name=="timing_flutter" then .sources = [ {"type":"file","path":"./TimingTrainer_snapshot.tar.gz"} ] else . end' com.adilhanney.timing.json > tmp.json && mv tmp.json com.adilhanney.timing.json
 
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          bundle: TimingFlutter_snapshot.flatpak
+          bundle: TimingTrainer_snapshot.flatpak
           manifest-path: com.adilhanney.timing.json
           upload-artifact: true

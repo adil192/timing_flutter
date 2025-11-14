@@ -1,0 +1,17 @@
+{
+    "dart.analysisExcludedFolders": [
+        "submodules"
+    ],
+    "files.exclude": {
+        "android/.gradle/": true,
+        "android/.kotlin/": true,
+        "linux/flutter/ephemeral/": true,
+        "macos/Flutter/ephemeral/": true,
+        "windows/flutter/ephemeral/": true,
+        "*.iml": true,
+        "submodules/*/*": true,
+        "**/.dart_tool/": true,
+        "**/.idea/": true,
+        "**/.flutter-plugins-dependencies": true,
+    }
+}
