@@ -74,12 +74,12 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Ricochlime-Android-Apk
+          name: TimingFlutter-Android-Apk
           path: output/${{ steps.rename.outputs.apkName }}
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Ricochlime-Android-Aab
+          name: TimingFlutter-Android-Aab
           path: output/${{ steps.rename.outputs.aabName }}
 
       - name: Upload to GitHub release
