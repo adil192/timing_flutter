@@ -29,20 +29,21 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-# dart run icons_launcher:create
+# ./scripts/generate_icons.sh
 icons_launcher:
   image_path: "assets/icon/icon.png"
   platforms:
     android:
       enable: true
-      adaptive_background_color: "#ffffff"
-      adaptive_foreground_image: "assets/icon/icon_foreground.png"
+      adaptive_background_color: "#1e2227"
+      adaptive_foreground_image: "assets/icon/icon_android_foreground.png"
+      adaptive_monochrome_image: "assets/icon/icon_android_monochrome.png"
     ios:
       enable: true
-      image_path: "assets/icon/icon_maskable.png"
+      image_path: "assets/icon/icon_ios.png"
     macos:
       enable: false
-      image_path: "assets/icon/icon_maskable.png"
+      image_path: "assets/icon/icon_ios.png"
     windows:
       enable: false
     linux:

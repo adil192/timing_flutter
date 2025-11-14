@@ -46,21 +46,9 @@
   }
 </style>
 
-<rect id="button-left"
-  x="-10" y="5" width="20" height="10"
-  rx="3" ry="3"
-  transform="translate(12.5 12.5) rotate(-45)"
-  fill="url(#gradient-button-left)"/>
-<rect id="button-right"
-  x="-10" y="5" width="20" height="10"
-  rx="3" ry="3"
-  transform="translate(87.4 12.5) rotate(45)"
-  fill="url(#gradient-button-right)"/>
+<rect width="100" height="100" fill="#1e2227" />
 
-<use id="body-edge"
-  xlink:href="#body-shape"
-  transform="translate(50 50) scale(1.08) translate(-50 -50)"
-  fill="url(#gradient-body-edge)"/>
+<g transform="translate(50 50) scale(0.7) translate(-50 -50)">
 <use id="body"
   xlink:href="#body-shape"
   transform="translate(50 50) scale(1.05) translate(-50 -50)"
@@ -91,5 +79,6 @@
   fill="#1a1d1c"
   text-anchor="end"
   >417</text>
+</g>
 </g>
 </svg>

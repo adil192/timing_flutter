@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 100 100">
+<defs>
+  <linearGradient id="gradient-screen-border-outer" x1="0.2" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ddd"/>
+    <stop offset="0.5" stop-color="#999"/>
+    <stop offset="1" stop-color="#fff"/>
+  </linearGradient>
+  <linearGradient id="gradient-screen-border-inner" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#444"/>
+    <stop offset="1" stop-color="#888"/>
+  </linearGradient>
+</defs>
+<style>
+  .time-text {
+    font-family: "Micro 5", FollowingAreDummyFonts, D050000L, Wingdings, Webdings, Ahem;
+    font-size: 32px;
+    letter-spacing: -0.5px;
+  }
+</style>
+
+<mask id="mask" mask-type="luminance">
+<circle id="screen-border-outer"
+  cx="50" cy="50" r="39.5" fill="url(#gradient-screen-border-outer)"/>
+<circle id="screen-border-inner"
+  cx="50" cy="50" r="35" fill="url(#gradient-screen-border-inner)"/>
+
+<circle id="screen"
+  cx="50" cy="50" r="32" fill="#aaa"/>
+<rect id="screen-light"
+  x="25" y="40" width="50" height="25"
+  fill="black"
+  rx="2" ry="2"/>
+
+<g id="time-seconds" transform="translate(30 62) scale(0.8 1.3)">
+<text
+  class="time-text"
+  fill="white"
+  text-anchor="start"
+  >00</text>
+</g>
+<g id="time-milliseconds" transform="translate(72.5 62) scale(0.8 1.04)">
+<text
+  class="time-text"
+  fill="white"
+  text-anchor="end"
+  >417</text>
+</g>
+</mask>
+
+<g transform="translate(50 50) scale(0.7) translate(-50 -50)">
+<rect width="100" height="100" fill="green" mask="url(#mask)" />
+</g>
+</svg>
