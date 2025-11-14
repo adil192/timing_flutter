@@ -105,7 +105,7 @@ class MyHomePageState extends State<MyHomePage> {
     "https://github.com/adil192/timing_flutter",
   );
   static final _privacyPolicyUri = Uri.parse(
-    "https://github.com/adil192/timing_flutter/blob/main/privacy-policy.md",
+    "https://adil192.github.io/timing_flutter/privacy-policy.html",
   );
   void _openGithub() => launchUrl(_githubUri);
   void _openPrivacyPolicy() => launchUrl(_privacyPolicyUri);
