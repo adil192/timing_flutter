@@ -46,9 +46,7 @@ void _screenshot(
             device: device,
             title: 'Timing Trainer',
             frameColors: frameColors,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: defaultColor),
-            ),
+            theme: MyApp.createTheme(Brightness.light),
             home: home,
           ),
         );

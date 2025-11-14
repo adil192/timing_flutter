@@ -19,24 +19,32 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @visibleForTesting
+  static ThemeData createTheme(
+    Brightness brightness, [
+    ColorScheme? colorScheme,
+  ]) {
+    colorScheme ??= ColorScheme.fromSeed(
+      seedColor: defaultColor,
+      brightness: brightness,
+    );
+    return ThemeData(
+      colorScheme: colorScheme,
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorScheme.primary,
+        foregroundColor: colorScheme.onPrimary,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
-        final lightColorScheme =
-            lightDynamic?.harmonized() ??
-            ColorScheme.fromSeed(seedColor: defaultColor);
-        final darkColorScheme =
-            darkDynamic?.harmonized() ??
-            ColorScheme.fromSeed(
-              seedColor: defaultColor,
-              brightness: Brightness.dark,
-            );
-
         return MaterialApp(
           title: 'Timing Trainer',
-          theme: ThemeData(colorScheme: lightColorScheme),
-          darkTheme: ThemeData(colorScheme: darkColorScheme),
+          theme: createTheme(Brightness.light, lightDynamic),
+          darkTheme: createTheme(Brightness.dark, darkDynamic),
           home: const MyHomePage(),
         );
       },
@@ -60,10 +68,6 @@ class MyHomePageState extends State<MyHomePage> {
 
   static const String submit = "Submit";
   static const String reset = "Reset";
-
-  static final Uri githubUri = Uri.parse(
-    "https://github.com/adil192/timing_flutter",
-  );
 
   @override
   initState() {
@@ -97,11 +101,16 @@ class MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void openGithub() {
-    launchUrl(githubUri, mode: LaunchMode.externalApplication);
-  }
+  static final _githubUri = Uri.parse(
+    "https://github.com/adil192/timing_flutter",
+  );
+  static final _privacyPolicyUri = Uri.parse(
+    "https://github.com/adil192/timing_flutter/blob/main/privacy-policy.md",
+  );
+  void _openGithub() => launchUrl(_githubUri);
+  void _openPrivacyPolicy() => launchUrl(_privacyPolicyUri);
 
-  void openSettings() {
+  void _openSettings() {
     showDialog(
       context: context,
       builder: (context) => const AlertDialog(content: SettingsDialog()),
@@ -113,24 +122,22 @@ class MyHomePageState extends State<MyHomePage> {
     final colorScheme = ColorScheme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Timing Trainer',
-          style: TextStyle(color: colorScheme.onPrimary),
-        ),
-        toolbarHeight: 70,
-        backgroundColor: colorScheme.primary,
-        actions: <Widget>[
+        title: Text('Timing Trainer'),
+        actions: [
           IconButton(
             icon: const Icon(Icons.code),
-            color: colorScheme.onPrimary,
-            iconSize: 45,
-            onPressed: openGithub,
+            tooltip: 'Source Code',
+            onPressed: _openGithub,
+          ),
+          IconButton(
+            icon: const Icon(Icons.privacy_tip),
+            tooltip: 'Privacy Policy',
+            onPressed: _openPrivacyPolicy,
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            color: colorScheme.onPrimary,
-            iconSize: 35,
-            onPressed: openSettings,
+            tooltip: 'Settings',
+            onPressed: _openSettings,
           ),
         ],
       ),
