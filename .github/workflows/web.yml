@@ -47,7 +47,7 @@ jobs:
           flutter-path: submodules/flutter
 
       - name: Build web
-        run: flutter build web --base-href "/timing_flutter/"
+        run: flutter build web --base-href "/timing_flutter/" --wasm
 
       - name: Build privacy_policy.html
         run: ./scripts/build_privacy_policy_html.sh
