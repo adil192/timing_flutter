@@ -57,6 +57,17 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="1.0.16" date="2025-11-15">
+            <description>
+                <ul>
+                    <li>Added a shiny new icon!</li>
+                    <li>Increased the size of the blinking square.</li>
+                    <li>Added a link to the privacy policy to satisfy Google Play (we still don't collect any data).</li>
+                    <li>Removed keyboard shortcuts because they're not useful.</li>
+                    <li>Updated Flutter to the new 3.38 stable release.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.15" date="2025-11-12">
             <description>
                 <ul>
