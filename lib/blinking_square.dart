@@ -61,17 +61,16 @@ class _BlinkingSquareState extends State<BlinkingSquare>
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    return AspectRatio(
-      aspectRatio: 1,
-      child: FadeTransition(
-        opacity: _opacityAnimation,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: colorScheme.primary,
+    return FadeTransition(
+      opacity: _opacityAnimation,
+      child: Container(
+        decoration: ShapeDecoration(
+          color: colorScheme.primary,
+          shape: RoundedSuperellipseBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(32)),
           ),
-          child: widget.child,
         ),
+        child: widget.child,
       ),
     );
   }

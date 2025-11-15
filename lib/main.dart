@@ -143,90 +143,95 @@ class MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          const Spacer(),
-          Center(
-            child: SizedBox(
-              width: 250,
-              child: BlinkingSquare(
-                isBlinking: !isSubmitted,
-                blinkOnDuration: Duration(milliseconds: _actualMs),
-                child: Opacity(
-                  opacity: isSubmitted ? 1 : 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Spacer(flex: 10),
-                        Text(
-                          '${_actualMs}ms',
-                          textAlign: TextAlign.center,
-                          style: TextTheme.of(context).displayMedium?.copyWith(
-                            color: colorScheme.onPrimary,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: 512,
+                    maxHeight: 512,
+                  ),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: BlinkingSquare(
+                      isBlinking: !isSubmitted,
+                      blinkOnDuration: Duration(milliseconds: _actualMs),
+                      child: Opacity(
+                        opacity: isSubmitted ? 1 : 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: .min,
+                            spacing: 8,
+                            children: [
+                              Text(
+                                '${_actualMs}ms',
+                                textAlign: TextAlign.center,
+                                style: TextTheme.of(context).displayMedium
+                                    ?.copyWith(color: colorScheme.onPrimary),
+                              ),
+                              Text(
+                                "You were "
+                                "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
+                                " frames off with your guess of ${_guessMs}ms!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: colorScheme.onPrimary,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        const Spacer(),
-                        Text(
-                          "You were "
-                          "${((_guessMs - _actualMs) / (1000 / 60)).round().abs()}"
-                          " frames off with your guess of ${_guessMs}ms!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: colorScheme.onPrimary,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const Spacer(flex: 10),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
           ),
-          const Spacer(),
+          const SizedBox(height: 20),
+          const Text("How long does the box above appear?"),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Slider(
+              value: _sliderValue.toDouble(),
+              min: 16,
+              max: 500,
+              divisions: 29,
+              onChanged: (double value) {
+                if (isSubmitted) return;
+                setState(() {
+                  _sliderValue = value.round();
+                });
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Text("How long does the box above appear?"),
-                Slider(
-                  value: _sliderValue.toDouble(),
-                  min: 16,
-                  max: 500,
-                  divisions: 29,
-                  onChanged: (double value) {
-                    if (isSubmitted) return;
-                    setState(() {
-                      _sliderValue = value.round();
-                    });
-                  },
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${_sliderValue}ms',
-                      style: const TextStyle(fontSize: 16),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      autofocus: true,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                      ),
-                      onPressed: _onSubmit,
-                      child: Text(
-                        isSubmitted ? reset : submit,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
+                Text('${_sliderValue}ms', style: const TextStyle(fontSize: 16)),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  autofocus: true,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                  ),
+                  onPressed: _onSubmit,
+                  child: Text(
+                    isSubmitted ? reset : submit,
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 ),
               ],
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );
