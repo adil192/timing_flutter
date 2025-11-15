@@ -14,9 +14,8 @@
     <stop offset="1" stop-color="#2b2e38"/>
   </linearGradient>
   <radialGradient id="gradient-body" cx="0.5" cy="0.5" r="0.5">
-    <stop offset="0.94" stop-color="#1e2227"/>
-    <stop offset="0.95" stop-color="#2b2e38"/>
-    <stop offset="1" stop-color="#1e2227"/>
+    <stop offset="0.7" stop-color="#1e2227"/>
+    <stop offset="1" stop-color="#2b2e38"/>
   </radialGradient>
   <linearGradient id="gradient-screen-border-outer" x1="0.2" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#262930"/>
@@ -27,6 +26,12 @@
     <stop offset="0" stop-color="#1e2227"/>
     <stop offset="1" stop-color="#2d2e35"/>
   </linearGradient>
+  <radialGradient id="gradient-screen" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0.1" stop-color="#2b2829"/>
+    <stop offset="0.8" stop-color="#383436"/>
+    <stop offset="0.98" stop-color="#383436"/>
+    <stop offset="1" stop-color="#4c4b57"/>
+  </radialGradient>
   <path id="body-shape" d="M 50 10
       C 66.57019 9.99602 66.57019 9.99602 78.2843 21.7157
       C 90.00398 33.42981 90.00398 33.42981 90 50
@@ -59,15 +64,19 @@
 <use id="body"
   xlink:href="#body-shape"
   transform="translate(50 50) scale(1.05) translate(-50 -50)"
-  fill="url(#gradient-body)"/>
+  fill="url(#gradient-body)" stroke="#3b3e47" stroke-width="0.3"/>
 
 <circle id="screen-border-outer"
-  cx="50" cy="50" r="39.5" fill="url(#gradient-screen-border-outer)"/>
+  cx="50" cy="50" r="39.5" fill="url(#gradient-screen-border-outer)"
+  stroke="#1e2227" stroke-width="0.2"
+  />
 <circle id="screen-border-inner"
-  cx="50" cy="50" r="35" fill="url(#gradient-screen-border-inner)"/>
+  cx="50" cy="50" r="35" fill="url(#gradient-screen-border-inner)"
+  stroke="#4c4b57" stroke-width="0.2"
+  />
 
 <circle id="screen"
-  cx="50" cy="50" r="32" fill="#383436"/>
+  cx="50" cy="50" r="32" fill="url(#gradient-screen)"/>
 <rect id="screen-light"
   x="25" y="40" width="50" height="25"
   fill="#99a29e"

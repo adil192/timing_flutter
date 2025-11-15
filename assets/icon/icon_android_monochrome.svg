@@ -9,16 +9,27 @@
     <stop offset="0" stop-color="#444"/>
     <stop offset="1" stop-color="#888"/>
   </linearGradient>
+  <radialGradient id="gradient-screen" cx="0.5" cy="0.5" r="0.5">
+    <stop offset="0.1" stop-color="#ccc"/>
+    <stop offset="0.8" stop-color="#aaa"/>
+    <stop offset="0.95" stop-color="#aaa"/>
+    <stop offset="0.99" stop-color="#bbb"/>
+    <stop offset="1" stop-color="#ccc"/>
+  </radialGradient>
 </defs>
 
 <mask id="mask" mask-type="luminance">
 <circle id="screen-border-outer"
-  cx="50" cy="50" r="39.5" fill="url(#gradient-screen-border-outer)"/>
+  cx="50" cy="50" r="39.5" fill="url(#gradient-screen-border-outer)"
+  stroke="white" stroke-width="0.1"
+  />
 <circle id="screen-border-inner"
-  cx="50" cy="50" r="35" fill="url(#gradient-screen-border-inner)"/>
+  cx="50" cy="50" r="35" fill="url(#gradient-screen-border-inner)"
+  stroke="#444" stroke-width="0.2"
+  />
 
 <circle id="screen"
-  cx="50" cy="50" r="32" fill="#aaa"/>
+  cx="50" cy="50" r="32" fill="url(#gradient-screen)"/>
 <rect id="screen-light"
   x="25" y="40" width="50" height="25"
   fill="black"
