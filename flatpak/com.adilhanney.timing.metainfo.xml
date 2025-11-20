@@ -57,6 +57,14 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="1.0.17" date="2025-11-20">
+            <description>
+                <ul>
+                    <li>Fixed the blinking duration not getting updated when switching the easy-mode toggle.</li>
+                    <li>Increased the icon's contrast against dark backgrounds.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.16" date="2025-11-15">
             <description>
                 <ul>
