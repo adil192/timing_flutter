@@ -1,26 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000" viewBox="0 0 100 100">
 <defs>
   <linearGradient id="gradient-button-left" x1="0" y1="1" x2="1" y2="0">
-    <stop offset="0" stop-color="#292b2e"/>
-    <stop offset="1" stop-color="#2a2f36"/>
+    <stop offset="0" stop-color="#4c4b57"/>
+    <stop offset="1" stop-color="#2d2e35"/>
   </linearGradient>
   <linearGradient id="gradient-button-right" x1="0" y1="1" x2="1" y2="0">
-    <stop offset="0" stop-color="#2a2f36"/>
+    <stop offset="0" stop-color="#4c4b57"/>
     <stop offset="1" stop-color="#292b2e"/>
   </linearGradient>
-  <linearGradient id="gradient-body-edge" x1="0" y1="0" x2="1" y2="0.4">
-    <stop offset="0" stop-color="#3b3e47"/>
-    <stop offset="0.3" stop-color="#2b2e38"/>
-    <stop offset="1" stop-color="#2b2e38"/>
-  </linearGradient>
+  <radialGradient id="gradient-body-edge" cx="0.55" cy="0.55" r="0.5">
+    <stop offset="0" stop-color="#2b2e38"/>
+    <stop offset="0.7" stop-color="#2b2e38"/>
+    <stop offset="1" stop-color="#4c4b57"/>
+  </radialGradient>
   <radialGradient id="gradient-body" cx="0.5" cy="0.5" r="0.5">
-    <stop offset="0.7" stop-color="#1e2227"/>
+    <stop offset="0.8" stop-color="#1e2227"/>
     <stop offset="1" stop-color="#2b2e38"/>
   </radialGradient>
   <linearGradient id="gradient-screen-border-outer" x1="0.2" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="#262930"/>
+    <stop offset="0" stop-color="#202227"/>
     <stop offset="0.5" stop-color="#4c4b57"/>
-    <stop offset="1" stop-color="#1e2227"/>
+    <stop offset="1" stop-color="#181b1f"/>
   </linearGradient>
   <linearGradient id="gradient-screen-border-inner" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#1e2227"/>
@@ -59,11 +59,11 @@
 
 <use id="body-edge"
   xlink:href="#body-shape"
-  transform="translate(50 50) scale(1.08) translate(-50 -50)"
+  transform="translate(50 50) scale(1.12) translate(-50 -50)"
   fill="url(#gradient-body-edge)"/>
 <use id="body"
   xlink:href="#body-shape"
-  transform="translate(50 50) scale(1.05) translate(-50 -50)"
+  transform="translate(50 50) scale(1.07) translate(-50 -50)"
   fill="url(#gradient-body)" stroke="#3b3e47" stroke-width="0.3"/>
 
 <circle id="screen-border-outer"
