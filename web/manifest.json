@@ -1,6 +1,6 @@
 {
-    "name": "timing_flutter",
-    "short_name": "timing_flutter",
+    "name": "Timing Trainer",
+    "short_name": "Timing Trainer",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
