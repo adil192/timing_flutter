@@ -29,11 +29,12 @@ class _BlinkingSquareState extends State<BlinkingSquare>
   void initState() {
     super.initState();
     _updateAnimation();
-    _controller.repeat(reverse: false);
+    stows.easyMode.addListener(_updateAnimation);
   }
 
   @override
   void dispose() {
+    stows.easyMode.removeListener(_updateAnimation);
     _controller.dispose();
     super.dispose();
   }
@@ -56,6 +57,7 @@ class _BlinkingSquareState extends State<BlinkingSquare>
     _opacityAnimation = widget.isBlinking
         ? _tween.animate(_controller)
         : AlwaysStoppedAnimation(1.0);
+    _controller.repeat(reverse: false);
   }
 
   @override
@@ -81,8 +83,8 @@ class _OpacityTween extends Tween<double> {
   late final double threshold; // 0 to 1
   _OpacityTween({required Duration blinkOnDuration, required bool easyMode})
     : super(begin: 1, end: 0) {
-    final int blinkOnMs = blinkOnDuration.inMilliseconds;
-    final int blinkOffMs = easyMode ? 1000 : blinkOnDuration.inMilliseconds;
+    final blinkOnMs = blinkOnDuration.inMilliseconds;
+    final blinkOffMs = easyMode ? 1000 : blinkOnMs;
     periodMs = blinkOnMs + blinkOffMs;
     threshold = blinkOnMs / periodMs;
   }
