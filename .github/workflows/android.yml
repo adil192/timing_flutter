@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Setup cache
+      - name: Restore cache
         uses: actions/cache/restore@v4
         with:
           path: |
@@ -24,7 +24,6 @@ jobs:
             macos/Flutter/ephemeral/
             windows/flutter/ephemeral/
             .flutter-plugins-dependencies
-            pubspec.lock
           key: ${{ runner.OS }}-TimingTrainer-${{ hashFiles('**/pubspec.lock') }}-${{ hashFiles('**/*.dart') }}
           restore-keys: |
             ${{ runner.OS }}-TimingTrainer-
