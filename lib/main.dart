@@ -12,7 +12,7 @@ import 'dart:math';
 const defaultColor = Colors.indigo;
 
 void main() {
-  Stows.volatile = false;
+  stows; // start loading
   runApp(const MyApp());
 }
 
