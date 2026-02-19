@@ -57,6 +57,16 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="1.1.0" date="2026-02-19">
+            <description>
+                <ul>
+                    <li>Fixed the window title text.</li>
+                    <li>The app can now use the Adwaita Sans font for GNOME users.</li>
+                    <li>Updated to Flutter 3.41.</li>
+                    <li>This flatpak is now built from source on Flathub.</li>
+                </ul>
+            </description>
+        </release>
         <release version="1.0.17" date="2025-11-20">
             <description>
                 <ul>
