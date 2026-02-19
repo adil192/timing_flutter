@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Restore cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: |
             .dart_tool/
@@ -71,12 +71,12 @@ jobs:
           mv build/app/outputs/bundle/release/app-release.aab output/$aabName
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: TimingFlutter-Android-Apk
           path: output/${{ steps.rename.outputs.apkName }}
       - name: Upload AAB artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: TimingFlutter-Android-Aab
           path: output/${{ steps.rename.outputs.aabName }}
