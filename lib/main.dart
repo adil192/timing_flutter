@@ -21,15 +21,17 @@ class MyApp extends StatelessWidget {
 
   @visibleForTesting
   static ThemeData createTheme(
-    Brightness brightness, [
+    Brightness brightness, {
+    TargetPlatform? platform,
     ColorScheme? colorScheme,
-  ]) {
+  }) {
     colorScheme ??= ColorScheme.fromSeed(
       seedColor: defaultColor,
       brightness: brightness,
     );
     return ThemeData(
       colorScheme: colorScheme,
+      platform: platform,
       appBarTheme: AppBarTheme(
         backgroundColor: colorScheme.primary,
         foregroundColor: colorScheme.onPrimary,
@@ -43,8 +45,8 @@ class MyApp extends StatelessWidget {
       builder: (lightDynamic, darkDynamic) {
         return MaterialApp(
           title: 'Timing Trainer',
-          theme: createTheme(Brightness.light, lightDynamic),
-          darkTheme: createTheme(Brightness.dark, darkDynamic),
+          theme: createTheme(.light, colorScheme: lightDynamic),
+          darkTheme: createTheme(.dark, colorScheme: darkDynamic),
           home: const MyHomePage(),
         );
       },

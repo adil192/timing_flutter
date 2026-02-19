@@ -31,8 +31,8 @@ void _screenshot(
   String description, {
   required Widget home,
   ScreenshotFrameColors frameColors = const ScreenshotFrameColors(
-    topBarIconBrightness: Brightness.light,
-    gestureHintBrightness: Brightness.dark,
+    topBarIconBrightness: .light,
+    gestureHintBrightness: .dark,
   ),
   Future<void> Function(WidgetTester tester)? beforeScreenshot,
 }) {
@@ -46,7 +46,7 @@ void _screenshot(
             device: device,
             title: 'Timing Trainer',
             frameColors: frameColors,
-            theme: MyApp.createTheme(Brightness.light),
+            theme: MyApp.createTheme(.light, platform: device.platform),
             home: home,
           ),
         );
