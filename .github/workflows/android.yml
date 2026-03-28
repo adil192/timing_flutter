@@ -71,12 +71,12 @@ jobs:
           mv build/app/outputs/bundle/release/app-release.aab output/$aabName
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: TimingFlutter-Android-Apk
           path: output/${{ steps.rename.outputs.apkName }}
       - name: Upload AAB artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: TimingFlutter-Android-Aab
           path: output/${{ steps.rename.outputs.aabName }}
