@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  dynamic_color: ^1.5.4
+  dynamic_color: ^2.1.0
 
   url_launcher: ^6.1.7
   stow_plain: ^0.6.0
@@ -24,7 +24,7 @@ dev_dependencies:
 
   icons_launcher: ^3.0.3
 
-  golden_screenshot: ^11.0.1
+  golden_screenshot: ^12.0.0
 
 flutter:
   uses-material-design: true
